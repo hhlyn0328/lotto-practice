@@ -19,6 +19,11 @@ public class StringAddCalculatorTest {
   }
 
   @Test
+  public void splitAndSum_음수숫자하나() throws Exception {
+    assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1"));
+  }
+
+  @Test
   public void splitAndSum_쉼표구분() throws Exception {
     int result = StringAddCalculator.splitAndSum("1,2");
     assertThat(result).isEqualTo(3);

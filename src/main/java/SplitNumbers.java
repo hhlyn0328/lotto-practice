@@ -1,46 +1,50 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class SplitNumbers {
 
   private static final String SLASH_BETWEEN_BACKSLASH_N_REGEX = "//(.)\n(.*)";
+  private static final Pattern SLASH_BETWEEN_BACKSLASH_N_REGEX_PATTERN = Pattern.compile(SLASH_BETWEEN_BACKSLASH_N_REGEX);
   private static final String COMMA_OR_COLON_REGEX = ",|:";
+  private static final int NUMBERS_INDEX = 2;
+  private static final int DELIMITER_INDEX = 1;
 
   private List<Integer> numbers;
 
   public SplitNumbers(String inputText) {
-    Matcher matcher = Pattern.compile(SLASH_BETWEEN_BACKSLASH_N_REGEX).matcher(inputText);
+    initNumbers(inputText);
+  }
+
+  private void initNumbers(String inputText) {
+    Matcher matcher = SLASH_BETWEEN_BACKSLASH_N_REGEX_PATTERN.matcher(inputText);
 
     if (matcher.find()) {
-      this.numbers = splitIntegers(Arrays.asList(matcher.group(2).split(matcher.group(1))));
+      this.numbers = parseValidInt(Arrays.asList(matcher.group(NUMBERS_INDEX).split(matcher.group(DELIMITER_INDEX))));
       return;
     }
 
-    this.numbers = splitIntegers(Arrays.asList(inputText.split(COMMA_OR_COLON_REGEX)));
+    this.numbers = parseValidInt(Arrays.asList(inputText.split(COMMA_OR_COLON_REGEX)));
   }
 
-  private static List<Integer> splitIntegers(List<String> splitStrings) {
+  private List<Integer> parseValidInt(List<String> splitStrings) {
+    List<Integer> splitIntegers = new ArrayList<>();
 
-    List<Integer> splitIntegers = splitStrings.stream().
-            map(Integer::parseInt).
-            collect(Collectors.toList());
-
-    isAnyMatchNegative(splitIntegers);
+    for (String splitString : splitStrings) {
+      splitIntegers.add(isNegative(Integer.parseInt(splitString)));
+    }
 
     return splitIntegers;
   }
 
-  private static void isAnyMatchNegative(List<Integer> collect) {
-    if (collect.stream().anyMatch(i -> isNegative(i))) {
+  private int isNegative(Integer i) {
+    if( i < 0){
       throw new RuntimeException();
     }
-  }
 
-  private static boolean isNegative(Integer i) {
-    return i < 0;
+    return i;
   }
 
   public int getSum() {
