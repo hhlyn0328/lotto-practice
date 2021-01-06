@@ -8,6 +8,8 @@ public class StringAddCalculator {
 
     private static final String CUSTOM_SEPARATOR ="//(.)\n(.*)";
     private static final Pattern PATTERN = Pattern.compile(CUSTOM_SEPARATOR);
+    private static final int DELIMITER_GROUP = 1;
+    private static final int NUMBER_GROUP = 1;
 
     public static int splitAndSum(String text) {
         if(text == null || text.isEmpty()) {
@@ -26,8 +28,8 @@ public class StringAddCalculator {
         Matcher matcher = PATTERN.matcher(text);
 
         if(matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(DELIMITER_GROUP);
+            return matcher.group(NUMBER_GROUP).split(customDelimiter);
         }
         return text.split(SPLIT_TEXT);
     }
@@ -41,13 +43,14 @@ public class StringAddCalculator {
         return sum;
     }
 
-    private static int parseInt(String number) {
+    private static int parseInt(String num) {
+        int number = Integer.parseInt(num);
         checkNativeNumber(number);
-        return Integer.parseInt(number);
+        return number;
     }
 
-    private static void checkNativeNumber(String number) {
-        if(Integer.parseInt(number) < 0) {
+    private static void checkNativeNumber(int number) {
+        if(number < 0) {
             throw new RuntimeException();
         }
     }
