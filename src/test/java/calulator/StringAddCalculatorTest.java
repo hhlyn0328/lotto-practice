@@ -15,9 +15,8 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    public void splitAndSum_숫자하나 () throws Exception {
-        int result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
+    public void splitAndSum_음수숫자하나 () throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1"));
     }
 
     @Test
@@ -39,7 +38,18 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    public void splitAndSum_custom_오입력 () throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("//;1;2;3"));
+    }
+
+    @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"));
+    }
+
+    @Test
+    public void splitAndSum_숫자하나 () throws Exception {
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
     }
 }

@@ -1,15 +1,20 @@
 package calulator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
-    private static final  String SPLIT_TEXT = ",|:";
-    private static final String CUSTOM_SEPARATOR = "//";
+    private static final String SPLIT_TEXT = ",|:";
+
+    private static final String CUSTOM_SEPARATOR ="//(.)\n(.*)";
+    private static final Pattern PATTERN = Pattern.compile(CUSTOM_SEPARATOR);
 
     public static int splitAndSum(String text) {
         if(text == null || text.isEmpty()) {
             return 0;
         }
         if(text.length() == 1) {
-            return Integer.parseInt(text);
+            return parseInt(text);
         }
 
         String[] numbers = splitText(text);
@@ -18,10 +23,11 @@ public class StringAddCalculator {
     }
 
     private static String[] splitText(String text) {
+        Matcher matcher = PATTERN.matcher(text);
 
-        if(text.contains(CUSTOM_SEPARATOR)) {
-            String split = text.substring(2,3);
-            return text.substring(4).split(split);
+        if(matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
         }
         return text.split(SPLIT_TEXT);
     }
@@ -30,15 +36,18 @@ public class StringAddCalculator {
 
         int sum=0;
         for(int i=0; i< numbers.length; i++) {
-            int number = Integer.parseInt(numbers[i]);
-            isNativeNumber(number);
-            sum += number;
+            sum += parseInt(numbers[i]);
         }
         return sum;
     }
 
-    private static void isNativeNumber(int number) {
-        if(number < 0) {
+    private static int parseInt(String number) {
+        checkNativeNumber(number);
+        return Integer.parseInt(number);
+    }
+
+    private static void checkNativeNumber(String number) {
+        if(Integer.parseInt(number) < 0) {
             throw new RuntimeException();
         }
     }
