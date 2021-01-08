@@ -16,30 +16,21 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine()); // nextInt 로 하면 뒤에 nextLine 이 넘어가서 parseInt로 한번 wrapping
     }
 
-    public static List<Integer> scannerLastWeekLottoNumber() {
+    public static LottoWinnerNumber scannerLastWeekLottoNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return parseLottoValidInt(Arrays.asList(SCANNER.nextLine().
+        return parseInt(Arrays.asList(SCANNER.nextLine().
                 replaceAll(BLANK, NOT_BLANK).
                 split(COMMA))
         );
     }
 
-    //테스트 돌려보려고 public으로 열었음
-    public static int isOneToFortyFiveNumber(Integer lottoNumber) {
-        if (lottoNumber <= 0 || lottoNumber > 45) {
-            throw new IllegalArgumentException();
-        }
-
-        return lottoNumber;
-    }
-
-    private static List<Integer> parseLottoValidInt(List<String> splitLottoNumberStrings) {
+    private static LottoWinnerNumber parseInt(List<String> splitLottoNumberStrings) {
         List<Integer> splitLottoNumberIntegers = new ArrayList<>();
 
         for (String lottoNumber : splitLottoNumberStrings) {
-            splitLottoNumberIntegers.add(isOneToFortyFiveNumber(Integer.parseInt(lottoNumber)));
+            splitLottoNumberIntegers.add(Integer.parseInt(lottoNumber));
         }
 
-        return splitLottoNumberIntegers;
+        return new LottoWinnerNumber(splitLottoNumberIntegers);
     }
 }

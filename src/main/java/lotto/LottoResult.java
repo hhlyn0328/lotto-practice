@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 public class LottoResult {
     public static final int THREE_MATCH_AMOUNT = 5000;
     public static final int FOUR_MATCH_AMOUNT = 50000;
@@ -19,12 +17,12 @@ public class LottoResult {
         return winningAmount;
     }
 
-    public LottoResult(List<Integer> winnerLottoNumber, LottoNumber lottoNumber) {
-        initMatchCount(winnerLottoNumber, lottoNumber);
-        initWinningAmount();
+    public LottoResult(LottoWinnerNumber lottoWinnerNumber, LottoNumber lottoNumber) {
+        calculateMatchCount(lottoWinnerNumber, lottoNumber);
+        calculateWinningAmount();
     }
 
-    private void initWinningAmount() {
+    private void calculateWinningAmount() {
         if (this.matchCount == 3) {
             this.winningAmount = THREE_MATCH_AMOUNT;
             return;
@@ -46,9 +44,9 @@ public class LottoResult {
         }
     }
 
-    private void initMatchCount(List<Integer> winnerLottoNumber, LottoNumber lottoNumber) {
-        this.matchCount = (int) winnerLottoNumber.stream().
-                filter(i -> lottoNumber.getLottoNumber().contains(i)).
+    private void calculateMatchCount(LottoWinnerNumber lottoWinnerNumber, LottoNumber lottoNumber) {
+        this.matchCount = (int) lottoWinnerNumber.getLottoWinnerNumber().stream().
+                filter(i -> lottoNumber.isContains(lottoNumber, i)).
                 count();
     }
 }

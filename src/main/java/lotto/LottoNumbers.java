@@ -13,23 +13,24 @@ public class LottoNumbers {
     public LottoNumbers() {
     }
 
+    // 테스트 코드 작성하기 위해서 생성
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public LottoNumbers(int inputAmount) {
         validationInputAmount(inputAmount);
         createLottoNumbers(inputAmount);
     }
 
     private void validationInputAmount(int inputAmount) {
-        if (inputAmount < 1000) {
+        if (inputAmount < LOTTO_PRICE) {
             throw new IllegalArgumentException();
         }
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
-    }
-
-    public void setLottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
     }
 
     public void createLottoNumbers(int inputCash) {
