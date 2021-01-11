@@ -8,7 +8,7 @@ public class LottoNumberTest {
 
     @Test
     public void 랜덤_6자리_생성_테스트() {
-        LottoNumber lottoNumber = new LottoNumber();
+        LottoNumber lottoNumber = new LottoNumber(LottoNumberGenerator.createLottoNumber());
         assertThat(lottoNumber.getLottoNumber().size()).isEqualTo(6);
     }
 

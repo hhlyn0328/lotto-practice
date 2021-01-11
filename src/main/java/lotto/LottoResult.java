@@ -46,7 +46,7 @@ public class LottoResult {
 
     private void calculateMatchCount(LottoWinnerNumber lottoWinnerNumber, LottoNumber lottoNumber) {
         this.matchCount = (int) lottoWinnerNumber.getLottoWinnerNumber().stream().
-                filter(i -> lottoNumber.isContains(lottoNumber, i)).
+                filter(lottoWinnerNumberEach -> lottoNumber.isContains(lottoWinnerNumberEach)).
                 count();
     }
 }

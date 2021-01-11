@@ -14,16 +14,8 @@ public class LottoWinnerNumber {
         return lottoWinnerNumber;
     }
 
-    //테스트 돌려보려고 public으로 열었음
-    public static List<Integer> isOneToFortyFiveNumber(List<Integer> lottoWinnerNumber) {
-
-        for (Integer lottoNumber : lottoWinnerNumber) {
-            if (lottoNumber <= 0 || lottoNumber > 45) {
-                throw new IllegalArgumentException();
-            }
-        }
-
-        return lottoWinnerNumber;
+    public List<Integer> isOneToFortyFiveNumber(List<Integer> lottoWinnerNumber) {
+        return LottoNumberValidation.isValidation(lottoWinnerNumber);
     }
 
     @Override

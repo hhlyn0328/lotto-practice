@@ -10,11 +10,11 @@ public class LottoNumbers {
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     // 테스트 코드 작성하기 위해서 생성
-    public LottoNumbers() {
+    protected LottoNumbers() {
     }
 
     // 테스트 코드 작성하기 위해서 생성
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    protected LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -38,7 +38,7 @@ public class LottoNumbers {
         int lottoCount = inputCash / LOTTO_PRICE;
 
         for (int i = 0; i < lottoCount; i++) {
-            this.lottoNumbers.add(new LottoNumber());
+            this.lottoNumbers.add(new LottoNumber(LottoNumberGenerator.createLottoNumber()));
         }
 
     }

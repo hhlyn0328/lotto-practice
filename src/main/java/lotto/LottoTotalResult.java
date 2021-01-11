@@ -30,7 +30,7 @@ public class LottoTotalResult {
     }
 
     private void calculateTotalWinningAmount(LottoResult lottoResult) {
-        this.totalWinningAmount = this.totalWinningAmount + lottoResult.getWinningAmount();
+        this.totalWinningAmount += lottoResult.getWinningAmount();
     }
 
     private void calculateMatchCount(LottoResult lottoResult) {

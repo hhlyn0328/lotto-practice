@@ -16,7 +16,16 @@ class LottoWinnerNumberTest {
         });
 
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoWinnerNumber(Arrays.asList(0, 2, 3, 4, 5, 46));
+            new LottoWinnerNumber(Arrays.asList(1, 2, 3, 4, 5, 46));
         });
+    }
+
+    @Test
+    void 번호가_중복인경우_Exception테스트() {
+
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            new LottoWinnerNumber(Arrays.asList(1, 1, 3, 4, 5, 6));
+        });
+
     }
 }
