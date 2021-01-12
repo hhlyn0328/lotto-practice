@@ -12,8 +12,7 @@ public class lottoGamesTest {
     @Test
     void game_2게임_숫자6개_test() {
         // 2장 구매시 각 6개의 숫자가 생성되었는지
-        LottoGame lottoGame = new LottoGame(2);
-        lottoGame.createLotto();
+        LottoGame lottoGame = new LottoGame(new Price(2000));
 
         int game1Size = lottoGame.getLottoGames().get(0).getLotto().size();
         int game2Size = lottoGame.getLottoGames().get(1).getLotto().size();
@@ -33,9 +32,9 @@ public class lottoGamesTest {
         Lotto lotto3 = new Lotto(lt3);
         List<Lotto> lottoList = Arrays.asList(lotto1, lotto2, lotto3);
 
-        LottoGame lottoGame = new LottoGame(lottoList);
+        LottoGame lottoGame = new LottoGame(lottoList, new Price(3000));
 
-        List<String> lottoWinningNumber = Arrays.asList("1","2","3","4","5","6");
+        Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,3,4,5,6)) ;
 
         LottoResult aa =  lottoGame.matching(lottoWinningNumber);
 

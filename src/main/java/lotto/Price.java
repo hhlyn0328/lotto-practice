@@ -3,12 +3,12 @@ package lotto;
 public class Price {
     private static final int PRICE_PER_GAME = 1000;
 
-    private static int price;
-    private int lottoCount;
+    private final int price;
+    private final int lottoCount;
 
     public Price(int price) {
-        this.price = price;
         checkPrice(price);
+        this.price = price;
         this.lottoCount = price / PRICE_PER_GAME;
     }
 
@@ -23,7 +23,7 @@ public class Price {
         return lottoCount;
     }
 
-    public static int getPrice() {
+    public int getPrice() {
         return price;
     }
 

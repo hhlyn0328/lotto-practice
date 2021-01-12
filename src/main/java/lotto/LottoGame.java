@@ -6,32 +6,32 @@ import java.util.List;
 public class LottoGame {
 
     private List<Lotto> lottos = new ArrayList<>();
+    private Price price;
 
-    public LottoGame(int gameCount) {
-        for(int i=0; i<gameCount; i++) {
+    public LottoGame(Price price) {
+        this.price = price;
+
+        for(int i=0; i<price.getLottoCount(); i++) {
             lottos.add(new Lotto());
         }
     }
 
-    public LottoGame(List<Lotto> lottoList) {// test용 생성자
+    public LottoGame(List<Lotto> lottoList,Price price) {// test용 생성자
+        this.price = price;
         this.lottos = lottoList;
-    }
-
-    public void createLotto() {
-        lottos.forEach(lotto -> lotto.createLotto());
     }
 
     public List<Lotto> getLottoGames() {
         return this.lottos;
     }
 
-    public LottoResult matching(List<String> winnerNumber) {
+    public LottoResult matching(Lotto winnerNumber) {
         List<LottoScore> lottoScores = new ArrayList<>();
 
         lottos.forEach(lotto -> {
             lottoScores.add(new LottoScore(lotto, lotto.matching(winnerNumber)));
         });
 
-        return new LottoResult(lottoScores);
+        return new LottoResult(lottoScores, price.getPrice());
     }
 }

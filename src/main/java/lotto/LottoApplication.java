@@ -7,12 +7,13 @@ public class LottoApplication {
         int lottoPrice = InputView.inputLottoPrice();
 
         Price price = new Price(lottoPrice);
-        LottoGame lottoGame = new LottoGame(price.getLottoCount());
-        lottoGame.createLotto();
+        LottoGame lottoGame = new LottoGame(price);
 
         ResultView.print(lottoGame);
 
-        List<String> winnerNumber = InputView.inputLastLottoNumber();
+        //List<String> winnerNumber = InputView.inputLastLottoNumber();
+
+        Lotto winnerNumber =  InputView.inputLastLottoNumber();
 
         LottoResult lottoResult = lottoGame.matching(winnerNumber);
         ResultView.printResult(lottoResult);

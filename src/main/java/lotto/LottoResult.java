@@ -11,9 +11,11 @@ public class LottoResult {
 
     private List<LottoScore> allScore;
     private Map<Long, Long> result;
+    private int lottoPrice;
 
-    public LottoResult(List<LottoScore> lottoScores) {
+    public LottoResult(List<LottoScore> lottoScores, int lottoPrice) {
         this.allScore = Collections.unmodifiableList(lottoScores);
+        this.lottoPrice = lottoPrice;
         this.result();
     }
 
@@ -27,7 +29,18 @@ public class LottoResult {
         long winningAmount = result.entrySet().stream()
                 .mapToLong(lotto -> Reward.rewardOfScore(lotto.getKey()) * lotto.getValue() ).sum() ;
 
-        return winningAmount / Price.getPrice();
+        return winningAmount / lottoPrice;
+    }
+
+    public long getCount(long score) {
+        if(result.get(score) == null) {
+            return 0;
+        }
+        return result.get(score);
+    }
+
+    public long getReward(long score) {
+        return  Reward.rewardOfScore(score);
     }
 
     public Map<Long, Long> getResult() {
