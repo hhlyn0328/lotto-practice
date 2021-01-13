@@ -18,6 +18,6 @@ public class ResultView {
         System.out.println(String.format("4개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getFourMatchCount()));
         System.out.println(String.format("5개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getFiveMatchCount()));
         System.out.println(String.format("6개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getSixMatchCount()));
-        System.out.println("총 수익률은 : " + String.format("%.2f",lottoTotalResult.getReturnRate()) + "입니다.");
+        System.out.println("" + String.format("총 수익률은 : %.2f 입니다.",lottoTotalResult.getReturnRate()));
     }
 }

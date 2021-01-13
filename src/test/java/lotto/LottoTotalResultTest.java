@@ -38,8 +38,13 @@ class LottoTotalResultTest {
 
     @Test
     void 수익률_계산_테스트() {
+        int inputAmount = this.lottoNumbers.getLottoNumbers().size() * LottoTotalResult.LOTTO_PRICE;
+
         LottoTotalResult lottoTotalResult = lottoNumbers.calculateMatchCountAndRate(this.lottoWinnerNumber);
-        assertThat(String.format("%.2f",lottoTotalResult.getReturnRate())).isEqualTo("0.36");
+
+        float returnRate = (float) lottoTotalResult.getTotalWinningAmount() / inputAmount;
+
+        assertThat(lottoTotalResult.getReturnRate()).isEqualTo(returnRate);
     }
 
     @Test

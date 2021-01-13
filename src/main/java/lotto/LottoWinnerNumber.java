@@ -4,15 +4,15 @@ import java.util.List;
 
 public class LottoWinnerNumber {
 
-    private List<Integer> lottoWinnerNumber;
+    private LottoNumber lottoWinnerNumber;
 
     public LottoWinnerNumber(List<Integer> lottoWinnerNumber) {
         LottoNumber lottoNumber = new LottoNumber(lottoWinnerNumber);
-        this.lottoWinnerNumber = lottoNumber.getLottoNumber();
+        this.lottoWinnerNumber = lottoNumber;
     }
 
     public int isMatchCount(LottoNumber lottoNumber) {
-        return (int) this.lottoWinnerNumber.stream()
+        return (int) this.lottoWinnerNumber.getLottoNumber().stream()
                 .filter(lottoNumber::isContains)
                 .count();
     }

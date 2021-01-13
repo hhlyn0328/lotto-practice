@@ -1,8 +1,13 @@
 package lotto;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -37,32 +42,23 @@ public class LottoNumberTest {
 
     }
 
-    @Test
-    void 번호가_6자리_Exception테스트() {
-
+    @ParameterizedTest
+    @MethodSource("generateData")
+    void 번호가_6자리_Exception테스트(List<Integer> numbers) {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(1));
+            new LottoNumber(numbers);
         });
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(1, 2));
-        });
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(1, 2, 3));
-        });
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(1, 2, 3, 4));
-        });
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(1, 2, 3, 4, 5));
-        });
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-        });
-
     }
+
+    static Stream<Arguments> generateData() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1)),
+                Arguments.of(Arrays.asList(1, 2)),
+                Arguments.of(Arrays.asList(1, 2, 3)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))
+                );
+    }
+
 }

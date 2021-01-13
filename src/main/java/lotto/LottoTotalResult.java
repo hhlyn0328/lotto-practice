@@ -61,10 +61,13 @@ public class LottoTotalResult {
         return sixMatchCount;
     }
 
+    // 테스트 코드에서 사용하기 위해 작성
+    protected int getTotalWinningAmount() {
+        return totalWinningAmount;
+    }
+
     public float getReturnRate() {
         return returnRate;
     }
-
-
 
 }
