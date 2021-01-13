@@ -38,13 +38,13 @@ class LottoTotalResultTest {
 
     @Test
     void 수익률_계산_테스트() {
-        LottoTotalResult lottoTotalResult = new LottoTotalResult(this.lottoWinnerNumber, this.lottoNumbers);
-        assertThat(lottoTotalResult.getReturnRate()).isEqualTo(0.35f);
+        LottoTotalResult lottoTotalResult = lottoNumbers.calculateMatchCountAndRate(this.lottoWinnerNumber);
+        assertThat(String.format("%.2f",lottoTotalResult.getReturnRate())).isEqualTo("0.36");
     }
 
     @Test
     void 일치하는_개수_테스트() {
-        LottoTotalResult lottoTotalResult = new LottoTotalResult(this.lottoWinnerNumber, this.lottoNumbers);
+        LottoTotalResult lottoTotalResult = lottoNumbers.calculateMatchCountAndRate(this.lottoWinnerNumber);
         assertThat(lottoTotalResult.getThreeMatchCount()).isEqualTo(1);
         assertThat(lottoTotalResult.getFourMatchCount()).isEqualTo(0);
         assertThat(lottoTotalResult.getFiveMatchCount()).isEqualTo(0);

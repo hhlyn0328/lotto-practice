@@ -3,7 +3,8 @@ package lotto;
 public class ResultView {
 
     public static void printLottoNumber(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers.getLottoNumbers().size() + "개를 구매했습니다.");
+        System.out.println(lottoNumbers.getLottoNumbers()
+                .size() + "개를 구매했습니다.");
 
         for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
             System.out.println(lottoNumber.toString());
@@ -17,6 +18,6 @@ public class ResultView {
         System.out.println(String.format("4개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getFourMatchCount()));
         System.out.println(String.format("5개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getFiveMatchCount()));
         System.out.println(String.format("6개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getSixMatchCount()));
-        System.out.println("총 수익률은 : " + lottoTotalResult.getReturnRate() + "입니다.");
+        System.out.println("총 수익률은 : " + String.format("%.2f",lottoTotalResult.getReturnRate()) + "입니다.");
     }
 }

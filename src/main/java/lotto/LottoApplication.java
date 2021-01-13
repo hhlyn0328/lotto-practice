@@ -6,7 +6,7 @@ public class LottoApplication {
         LottoNumbers lottoNumbers = new LottoNumbers(InputView.scannerBuyAmount());
         ResultView.printLottoNumber(lottoNumbers);
 
-        LottoTotalResult lottoTotalResult = new LottoTotalResult(InputView.scannerLastWeekLottoNumber(), lottoNumbers);
+        LottoTotalResult lottoTotalResult = lottoNumbers.calculateMatchCountAndRate(InputView.scannerLastWeekLottoNumber());
         ResultView.printMatchCount(lottoTotalResult);
     }
 

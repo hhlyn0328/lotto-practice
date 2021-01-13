@@ -7,15 +7,14 @@ public class LottoWinnerNumber {
     private List<Integer> lottoWinnerNumber;
 
     public LottoWinnerNumber(List<Integer> lottoWinnerNumber) {
-        this.lottoWinnerNumber = isOneToFortyFiveNumber(lottoWinnerNumber);
+        LottoNumber lottoNumber = new LottoNumber(lottoWinnerNumber);
+        this.lottoWinnerNumber = lottoNumber.getLottoNumber();
     }
 
-    public List<Integer> getLottoWinnerNumber() {
-        return lottoWinnerNumber;
-    }
-
-    public List<Integer> isOneToFortyFiveNumber(List<Integer> lottoWinnerNumber) {
-        return LottoNumberValidation.isValidation(lottoWinnerNumber);
+    public int isMatchCount(LottoNumber lottoNumber) {
+        return (int) this.lottoWinnerNumber.stream()
+                .filter(lottoNumber::isContains)
+                .count();
     }
 
     @Override

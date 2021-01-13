@@ -34,13 +34,25 @@ public class LottoNumbers {
     }
 
     public void createLottoNumbers(int inputCash) {
-
         int lottoCount = inputCash / LOTTO_PRICE;
 
         for (int i = 0; i < lottoCount; i++) {
-            this.lottoNumbers.add(new LottoNumber(LottoNumberGenerator.createLottoNumber()));
+            this.lottoNumbers.add(LottoNumberGenerator.createLottoNumber());
+        }
+    }
+
+    public LottoTotalResult calculateMatchCountAndRate(LottoWinnerNumber lottoWinnerNumber) {
+        LottoTotalResult lottoTotalResult = new LottoTotalResult();
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+
+            LottoResult lottoResult = new LottoResult(lottoWinnerNumber, lottoNumber);
+            lottoTotalResult.add(lottoResult);
+
         }
 
+        lottoTotalResult.calculateReturnRate(this.lottoNumbers.size());
+
+        return lottoTotalResult;
     }
 
 }

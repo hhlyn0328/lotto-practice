@@ -1,9 +1,7 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoTotalResult {
+    public static final int LOTTO_PRICE = 1000;
 
     private int threeMatchCount = 0;
     private int fourMatchCount = 0;
@@ -12,50 +10,39 @@ public class LottoTotalResult {
     private int totalWinningAmount = 0;
     private float returnRate;
 
-    public LottoTotalResult(LottoWinnerNumber lottoWinnerNumber, LottoNumbers lottoNumbers) {
-        calculateReturnRate(calculateMatchCounts(lottoWinnerNumber, lottoNumbers));
+    public LottoTotalResult() {
     }
 
-    private List<LottoResult> calculateMatchCounts(LottoWinnerNumber lottoWinnerNumber, LottoNumbers lottoNumbers) {
-        List<LottoResult> lottoResultList = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
-
-            LottoResult lottoResult = new LottoResult(lottoWinnerNumber, lottoNumber);
-            lottoResultList.add(lottoResult);
-
-            calculateTotalWinningAmount(lottoResult);
-            calculateMatchCount(lottoResult);
-        }
-        return lottoResultList;
+    public void add(LottoResult lottoResult) {
+        calculateTotalWinningAmount(lottoResult);
+        calculateMatchCount(lottoResult);
     }
 
-    private void calculateTotalWinningAmount(LottoResult lottoResult) {
+    public void calculateTotalWinningAmount(LottoResult lottoResult) {
         this.totalWinningAmount += lottoResult.getWinningAmount();
     }
 
-    private void calculateMatchCount(LottoResult lottoResult) {
-        if (lottoResult.getMatchCount() == 3) {
+    public void calculateMatchCount(LottoResult lottoResult) {
+        if (lottoResult.isMatchCount(3)) {
             this.threeMatchCount++;
         }
 
-        if (lottoResult.getMatchCount() == 4) {
+        if (lottoResult.isMatchCount(4)) {
             this.fourMatchCount++;
         }
 
-        if (lottoResult.getMatchCount() == 5) {
+        if (lottoResult.isMatchCount(5)) {
             this.fiveMatchCount++;
         }
 
-        if (lottoResult.getMatchCount() == 6) {
+        if (lottoResult.isMatchCount(6)) {
             this.sixMatchCount++;
         }
     }
 
-    private void calculateReturnRate(List<LottoResult> lottoResultList) {
-        float inputAmount = lottoResultList.size() * 1000;
-        float result = this.totalWinningAmount / inputAmount;
-        this.returnRate = (float) (Math.floor(result * 100) / 100);
-
+    public void calculateReturnRate(int lottoNumberSize) {
+        float inputAmount = lottoNumberSize * LOTTO_PRICE;
+        this.returnRate = this.totalWinningAmount / inputAmount;
     }
 
     public int getThreeMatchCount() {
@@ -77,6 +64,7 @@ public class LottoTotalResult {
     public float getReturnRate() {
         return returnRate;
     }
+
 
 
 }
