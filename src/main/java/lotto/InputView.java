@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -16,11 +17,13 @@ public class InputView {
 
     protected static Lotto inputLastLottoNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(parseIntArray(scanner.nextLine().split(SPLIT_TEXT)));
+        return parseLotto(scanner.nextLine().split(SPLIT_TEXT));
     }
 
-    protected static List<Integer> parseIntArray(String[] lottoNumber) {
-        List<String> arr = new ArrayList<>(Arrays.asList(lottoNumber));
-        return new ArrayList<>(Arrays.asList(arr.toArray(new Integer[arr.size()])));
+    protected static Lotto parseLotto(String[] lottoNumber) {
+        List<Integer> lottoNumbers = Arrays.stream(lottoNumber)
+                .map(a -> Integer.parseInt(a))
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
     }
 }
