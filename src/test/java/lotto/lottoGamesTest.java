@@ -23,9 +23,9 @@ public class lottoGamesTest {
 
     @Test
     void game_3게임_3개일치_4개일치_Test() {
-        List<Integer> lt1 = Arrays.asList(0,0,1,2,3,0) ;
+        List<Integer> lt1 = Arrays.asList(1,8,1,2,3,9) ;
         List<Integer> lt2 = Arrays.asList(7,8,9,10,11,12) ;
-        List<Integer> lt3 = Arrays.asList(1,2,0,4,0,6) ;
+        List<Integer> lt3 = Arrays.asList(1,2,8,4,9,6) ;
 
         Lotto lotto1 = new Lotto(lt1);
         Lotto lotto2 = new Lotto(lt2);
@@ -38,8 +38,8 @@ public class lottoGamesTest {
 
         LottoResult aa =  lottoGame.matching(lottoWinningNumber);
 
-        assertThat(aa.getResult().get(3L)).isEqualTo(1L);
-        assertThat(aa.getResult().get(4L)).isEqualTo(1L);
+        assertThat(aa.getResult().get(Reward.SCORE_3)).isEqualTo(1L);
+        assertThat(aa.getResult().get(Reward.SCORE_4)).isEqualTo(1L);
 
     }
 

@@ -14,6 +14,7 @@ public class LottoGame {
         for(int i=0; i<price.getLottoCount(); i++) {
             lottos.add(new Lotto());
         }
+
     }
 
     public LottoGame(List<Lotto> lottoList,Price price) {// test용 생성자
@@ -32,6 +33,6 @@ public class LottoGame {
             lottoScores.add(new LottoScore(lotto, lotto.matching(winnerNumber)));
         });
 
-        return new LottoResult(lottoScores, price.getPrice());
+        return new LottoResult(lottoScores, price);
     }
 }

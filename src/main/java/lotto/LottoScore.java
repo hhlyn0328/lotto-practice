@@ -2,14 +2,16 @@ package lotto;
 
 public class LottoScore {
     private Lotto lotto;
-    private long score;
 
-    public LottoScore(Lotto lotto, long score) {
+    public Reward getReward() {
+        return reward;
+    }
+
+    private Reward reward;
+
+    public LottoScore(Lotto lotto, Reward reward) {
         this.lotto = lotto;
-        this.score = score;
+        this.reward = reward;
     }
 
-    public long getScore() {
-        return score;
-    }
 }

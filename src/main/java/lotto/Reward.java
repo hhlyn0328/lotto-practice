@@ -10,18 +10,27 @@ public enum Reward {
     SCORE_6(6,2000000000);
 
     private final long score;
-    private final long reward;
+    private final long amount;
 
-    Reward(int score, int reward) {
+    Reward(int score, int amount) {
         this.score = score;
-        this.reward = reward;
+        this.amount = amount;
     }
 
-    public static long rewardOfScore(long score) {
+    public static long amountOfReward(Reward reward) {
+        return reward.amount ;
+    }
+
+    public static long scoreOfReward(Reward reward) {
+        return reward.score;
+    }
+
+    public static Reward rewardOfScore(long score) {
         return Arrays.stream(Reward.values())
                 .filter(reward -> reward.score == score)
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new).reward;
+                .orElse(Reward.SCORE_0);
+
     }
 
 

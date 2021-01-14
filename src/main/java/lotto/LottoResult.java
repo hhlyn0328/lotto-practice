@@ -1,49 +1,47 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
-    private static final long WINING_SCORE_LIMIT = 3;
-
     private List<LottoScore> allScore;
-    private Map<Long, Long> result;
-    private int lottoPrice;
+    private Map<Reward, Long> countOfScore;
+    private Price price;
 
-    public LottoResult(List<LottoScore> lottoScores, int lottoPrice) {
+    public LottoResult(List<LottoScore> lottoScores, Price price) {
         this.allScore = Collections.unmodifiableList(lottoScores);
-        this.lottoPrice = lottoPrice;
+        this.price = price;
         this.result();
     }
 
     private void result() {
-        result = allScore.stream()
-                .filter(lottoScore -> lottoScore.getScore() >= WINING_SCORE_LIMIT)
-                .collect(Collectors.groupingBy(LottoScore::getScore, TreeMap::new,Collectors.counting()));
+        countOfScore = allScore.stream()
+                .filter(lottoScore -> !Reward.SCORE_0.equals(lottoScore.getReward()) )
+                .collect(Collectors.groupingBy(LottoScore::getReward, TreeMap::new,Collectors.counting()));
     }
 
     public long winningRate() {
-        long winningAmount = result.entrySet().stream()
-                .mapToLong(lotto -> Reward.rewardOfScore(lotto.getKey()) * lotto.getValue() ).sum() ;
 
-        return winningAmount / lottoPrice;
+        long winningAmount = countOfScore.entrySet().stream()
+                .mapToLong(lotto -> Reward.amountOfReward(lotto.getKey()) * lotto.getValue() ).sum() ;
+
+        return price.getWinningRate(winningAmount);
     }
 
-    public long getCount(long score) {
-        if(result.get(score) == null) {
+    public long getCount(Reward reward) {
+        if(countOfScore.get(reward) == null) {
             return 0;
         }
-        return result.get(score);
+        return countOfScore.get(reward);
     }
 
-    public long getReward(long score) {
-        return  Reward.rewardOfScore(score);
-    }
+    public Map<Reward, Long> getResult() {
 
-    public Map<Long, Long> getResult() {
-        return result;
+        Map<Reward, Long> results = new EnumMap<>(Reward.class);
+
+        for (Reward reward : Reward.values()) {
+            results.put(reward, getCount(reward));
+        }
+        return results;
     }
 }

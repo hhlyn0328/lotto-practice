@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class lottoTest {
 
@@ -25,21 +24,10 @@ public class lottoTest {
         Lotto lotto = new Lotto(ll);
         Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
-        long score = lotto.matching(lottoWinningNumber);
+        Reward reward = lotto.matching(lottoWinningNumber);
 
-        assertThat(score).isEqualTo(3);
+        assertThat(Reward.scoreOfReward(reward)).isEqualTo(3);
 
     }
-
-    @Test
-    void lotto_숫자중복_test() {
-        List<Integer> ll = Arrays.asList(0,0,1,2,3,0) ;
-        Lotto lotto = new Lotto(ll);
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            lotto.duplicationNumber();
-        });
-    }
-
 
 }

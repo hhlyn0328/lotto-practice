@@ -23,8 +23,7 @@ public class Price {
         return lottoCount;
     }
 
-    public int getPrice() {
-        return price;
+    public long getWinningRate(long winningAmount) {
+        return winningAmount / price;
     }
-
 }

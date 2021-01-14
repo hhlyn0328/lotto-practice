@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 public class LottoApplication {
     public static void main(String[] args) {
         int lottoPrice = InputView.inputLottoPrice();
@@ -10,8 +8,6 @@ public class LottoApplication {
         LottoGame lottoGame = new LottoGame(price);
 
         ResultView.print(lottoGame);
-
-        //List<String> winnerNumber = InputView.inputLastLottoNumber();
 
         Lotto winnerNumber =  InputView.inputLastLottoNumber();
 
