@@ -11,8 +11,8 @@ public class LottoResult {
 
     private int winningAmount;
 
-    public LottoResult(LottoWinnerNumber lottoWinnerNumber, LottoNumber lottoNumber) {
-        this.matchCount = lottoWinnerNumber.isMatchCount(lottoNumber);
+    public LottoResult(int matchCount) {
+        this.matchCount = matchCount;
         calculateWinningAmount();
     }
 
@@ -42,7 +42,7 @@ public class LottoResult {
         return winningAmount;
     }
 
-    public boolean isMatchCount(int matchCount) {
+    public boolean matchCountEqual(int matchCount) {
         return this.matchCount == matchCount;
     }
 }

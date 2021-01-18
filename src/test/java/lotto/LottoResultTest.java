@@ -11,10 +11,9 @@ class LottoResultTest {
     @Test
     void 당첨번호랑_로또번호랑_몇개_일치하는지_체크() {
         LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(6, 5, 4, 45, 2, 1));
+        LottoResult lottoResult = lottoWinnerNumber.isMatchCount(lottoNumber);
 
-        LottoResult lottoResult = new LottoResult(lottoWinnerNumber, lottoNumber);
         assertThat(lottoResult.getMatchCount()).isEqualTo(5);
     }
 

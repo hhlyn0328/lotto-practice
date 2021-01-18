@@ -11,10 +11,15 @@ public class LottoWinnerNumber {
         this.lottoWinnerNumber = lottoNumber;
     }
 
-    public int isMatchCount(LottoNumber lottoNumber) {
-        return (int) this.lottoWinnerNumber.getLottoNumber().stream()
+    public LottoResult isMatchCount(LottoNumber lottoNumber) {
+
+        int matchCount = (int) this.lottoWinnerNumber.getLottoNumber().stream()
                 .filter(lottoNumber::isContains)
                 .count();
+
+        LottoResult lottoResult = new LottoResult(matchCount);
+
+        return lottoResult;
     }
 
     @Override

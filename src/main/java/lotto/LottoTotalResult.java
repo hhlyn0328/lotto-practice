@@ -23,19 +23,19 @@ public class LottoTotalResult {
     }
 
     public void calculateMatchCount(LottoResult lottoResult) {
-        if (lottoResult.isMatchCount(3)) {
+        if (lottoResult.matchCountEqual(3)) {
             this.threeMatchCount++;
         }
 
-        if (lottoResult.isMatchCount(4)) {
+        if (lottoResult.matchCountEqual(4)) {
             this.fourMatchCount++;
         }
 
-        if (lottoResult.isMatchCount(5)) {
+        if (lottoResult.matchCountEqual(5)) {
             this.fiveMatchCount++;
         }
 
-        if (lottoResult.isMatchCount(6)) {
+        if (lottoResult.matchCountEqual(6)) {
             this.sixMatchCount++;
         }
     }

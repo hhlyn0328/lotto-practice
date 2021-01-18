@@ -45,7 +45,7 @@ public class LottoNumbers {
         LottoTotalResult lottoTotalResult = new LottoTotalResult();
         for (LottoNumber lottoNumber : this.lottoNumbers) {
 
-            LottoResult lottoResult = new LottoResult(lottoWinnerNumber, lottoNumber);
+            LottoResult lottoResult = lottoWinnerNumber.isMatchCount(lottoNumber);
             lottoTotalResult.add(lottoResult);
 
         }

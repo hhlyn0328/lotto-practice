@@ -1,9 +1,9 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -25,11 +25,9 @@ public class InputView {
     }
 
     private static LottoWinnerNumber parseInt(List<String> splitLottoNumberStrings) {
-        List<Integer> splitLottoNumberIntegers = new ArrayList<>();
-
-        for (String lottoNumber : splitLottoNumberStrings) {
-            splitLottoNumberIntegers.add(Integer.parseInt(lottoNumber));
-        }
+        List<Integer> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
+                .map(splitLottoNumberInteger -> Integer.parseInt(splitLottoNumberInteger))
+                .collect(Collectors.toList());
 
         return new LottoWinnerNumber(splitLottoNumberIntegers);
     }
