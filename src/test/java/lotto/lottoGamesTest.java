@@ -23,7 +23,7 @@ public class lottoGamesTest {
 
     @Test
     void game_3게임_3개일치_4개일치_Test() {
-        List<Integer> lt1 = Arrays.asList(1,8,1,2,3,9) ;
+        List<Integer> lt1 = Arrays.asList(1,8,10,2,3,9) ;
         List<Integer> lt2 = Arrays.asList(7,8,9,10,11,12) ;
         List<Integer> lt3 = Arrays.asList(1,2,8,4,9,6) ;
 

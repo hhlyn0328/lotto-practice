@@ -16,7 +16,7 @@ public class LottoResult {
 
     private void result() {
         countOfScore = allScore.stream()
-                .filter(lottoScore -> !Reward.SCORE_0.equals(lottoScore.getReward()) )
+                .filter(lottoScore -> lottoScore.isNotZeroReward() )
                 .collect(Collectors.groupingBy(LottoScore::getReward, TreeMap::new,Collectors.counting()));
     }
 

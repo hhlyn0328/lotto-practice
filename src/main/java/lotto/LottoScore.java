@@ -2,11 +2,6 @@ package lotto;
 
 public class LottoScore {
     private Lotto lotto;
-
-    public Reward getReward() {
-        return reward;
-    }
-
     private Reward reward;
 
     public LottoScore(Lotto lotto, Reward reward) {
@@ -14,4 +9,11 @@ public class LottoScore {
         this.reward = reward;
     }
 
+    public boolean isNotZeroReward() {
+        return !Reward.SCORE_0.equals(reward);
+    }
+
+    public Reward getReward() {
+        return reward;
+    }
 }

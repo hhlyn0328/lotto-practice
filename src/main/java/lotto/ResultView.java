@@ -21,7 +21,7 @@ public class ResultView {
 
         printScore(lottoResult);
 
-        System.out.println("총 수익률은 " + lottoResult.winningRate() + "입니다.");
+            System.out.println("총 수익률은 " + lottoResult.winningRate() + "입니다.");
     }
 
     private static void printScore(LottoResult lottoResult) {

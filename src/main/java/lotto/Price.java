@@ -14,7 +14,7 @@ public class Price {
 
     private void checkPrice(int price) {
         if(price < PRICE_PER_GAME) {
-            throw new RuntimeException("최소 게임 금액음 1000원입니다. ");
+            throw new RuntimeException("최소 게임 금액은" + PRICE_PER_GAME + "원입니다. ");
         }
 
     }

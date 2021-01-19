@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +21,7 @@ public class InputView {
 
     protected static Lotto parseLotto(String[] lottoNumber) {
         List<Integer> lottoNumbers = Arrays.stream(lottoNumber)
-                .map(a -> Integer.parseInt(a))
+                .map(number -> Integer.parseInt(number))
                 .collect(Collectors.toList());
         return new Lotto(lottoNumbers);
     }

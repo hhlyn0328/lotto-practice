@@ -1,11 +1,12 @@
 package lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
     private List<Integer> lotto ;
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
 
     public Lotto() {
         lotto = LottoNumber.autoGenerateNumber();
@@ -18,9 +19,9 @@ public class Lotto {
     }
 
     private void validationNumber() {
-        notDupulicateNumber();
-        validRangeNumber();
-        validNumberSize();
+        isDupulicationNumber();
+        isValidRangeNumber();
+        idValidNumberSize();
     }
 
     public List<Integer> getLotto() {
@@ -35,28 +36,20 @@ public class Lotto {
         return Reward.rewardOfScore(score);
     }
 
-    public  void validNumberSize() {
-        if(lotto.size() != 6) {
+    public  void idValidNumberSize() {
+        if(lotto.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
     }
 
-    public  void notDupulicateNumber() {
-        List<Integer> dupList = lotto.stream().distinct().collect(Collectors.toList());
+    public  void isDupulicationNumber() {
+        LottoNumber.isDupulicationNumber(lotto);
 
-        if(dupList.size() != LottoNumber.getLottoNumberCount()) {
-            throw new IllegalArgumentException();
-        }
     }
 
-    public  void validRangeNumber() {
-        long minusNumCount = lotto.stream()
-                .filter(number -> number < LottoNumber.getMinNumber() || number > LottoNumber.getMaxNumber())
-                .count();
+    public  void isValidRangeNumber() {
+        LottoNumber.isValidRangeNumber(lotto);
 
-        if(minusNumCount > 0) {
-            throw new IllegalArgumentException();
-        }
     }
 
 }

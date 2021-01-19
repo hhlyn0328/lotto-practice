@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -17,7 +18,7 @@ public class LottoGame {
 
     }
 
-    public LottoGame(List<Lotto> lottoList,Price price) {// test용 생성자
+    protected LottoGame(List<Lotto> lottoList,Price price) {// test용 생성자
         this.price = price;
         this.lottos = lottoList;
     }
@@ -29,9 +30,9 @@ public class LottoGame {
     public LottoResult matching(Lotto winnerNumber) {
         List<LottoScore> lottoScores = new ArrayList<>();
 
-        lottos.forEach(lotto -> {
-            lottoScores.add(new LottoScore(lotto, lotto.matching(winnerNumber)));
-        });
+        lottoScores = lottos.stream()
+                .map(lotto -> new LottoScore(lotto, lotto.matching(winnerNumber)))
+                .collect(Collectors.toList());
 
         return new LottoResult(lottoScores, price);
     }
