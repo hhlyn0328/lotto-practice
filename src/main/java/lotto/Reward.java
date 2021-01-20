@@ -3,11 +3,12 @@ package lotto;
 import java.util.Arrays;
 
 public enum Reward {
-    SCORE_0(0,0),
-    SCORE_3(3,5000),
-    SCORE_4(4,50000),
-    SCORE_5(5,1500000),
-    SCORE_6(6,2000000000);
+    FIRST(6,2000000000),
+    SECOND(5,30000000),
+    THIRD(5,1500000),
+    FOURTH(4,50000),
+    FIFTH(3,5000),
+    MISS(0,0);
 
     private final long score;
     private final long amount;
@@ -25,11 +26,13 @@ public enum Reward {
         return reward.score;
     }
 
-    public static Reward rewardOfScore(long score) {
+    public static Reward rewardOfScore(long score, boolean isMatchingBonusNumber) {
+
         return Arrays.stream(Reward.values())
-                .filter(reward -> reward.score == score)
+                .filter(reward -> (reward.score == score && isMatchingBonusNumber)
+                        || (!reward.equals(SECOND) && reward.score == score))
                 .findFirst()
-                .orElse(Reward.SCORE_0);
+                .orElse(Reward.MISS);
 
     }
 

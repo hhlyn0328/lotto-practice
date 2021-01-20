@@ -36,10 +36,10 @@ public class lottoGamesTest {
 
         Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,3,4,5,6)) ;
 
-        LottoResult aa =  lottoGame.matching(lottoWinningNumber);
+        LottoResult aa =  lottoGame.matching(lottoWinningNumber, new BonusNumber(7));
 
-        assertThat(aa.getResult().get(Reward.SCORE_3)).isEqualTo(1L);
-        assertThat(aa.getResult().get(Reward.SCORE_4)).isEqualTo(1L);
+        assertThat(aa.getResult().get(Reward.FIFTH)).isEqualTo(1L);
+        assertThat(aa.getResult().get(Reward.FOURTH)).isEqualTo(1L);
 
     }
 

@@ -1,9 +1,11 @@
 package lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final int SCORE_IS_FIVE = 5;
     private List<Integer> lotto ;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
@@ -28,12 +30,24 @@ public class Lotto {
         return lotto;
     }
 
-    public Reward matching(Lotto winnerNumber) {
-        long score = lotto.stream()
+    public Reward matching(Lotto winnerNumber, BonusNumber bonusNumber) {
+        List<Integer> matchedNumbers = lotto.stream()
                 .filter(number -> winnerNumber.getLotto().contains(number))
-                .mapToInt(Integer::intValue).count();
+                .collect(Collectors.toList());
 
-        return Reward.rewardOfScore(score);
+        boolean isMatchingBonusNumber = isFiveScore(bonusNumber, matchedNumbers);
+        return Reward.rewardOfScore(matchedNumbers.size(), isMatchingBonusNumber);
+    }
+
+    private boolean isFiveScore(BonusNumber bonusNumber, List<Integer> matchedNumbers) {
+        if(matchedNumbers.size() != SCORE_IS_FIVE) {
+            return false;
+        }
+        int remainNumber = lotto.stream()
+                .peek(number -> matchedNumbers.remove(number))
+                .findFirst().orElse(0);
+
+        return bonusNumber.isMatchingBonus(remainNumber);
     }
 
     public  void idValidNumberSize() {
