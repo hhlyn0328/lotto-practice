@@ -32,12 +32,12 @@ public class lottoTest {
 
     @Test
     void lotto_5등_보너스번호_일치_test() {
-        List<Integer> ll = Arrays.asList(7,1,2,3,4,5) ;
+        List<Integer> ll = Arrays.asList(1,2,3,4,5,6) ;
 
         Lotto lotto = new Lotto(ll);
-        Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,4,5,6,10));
 
-        Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(7));
+        Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(3));
 
         assertThat(Reward.scoreOfReward(reward)).isEqualTo(5);
         assertThat(Reward.amountOfReward(reward)).isEqualTo(30000000);
@@ -46,7 +46,7 @@ public class lottoTest {
 
     @Test
     void lotto_5등_보너스번호_일치하지않음_test() {
-        List<Integer> ll = Arrays.asList(7,1,2,3,4,5) ;
+        List<Integer> ll = Arrays.asList(1,2,3,4,5,7) ;
 
         Lotto lotto = new Lotto(ll);
         Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,3,4,5,6));

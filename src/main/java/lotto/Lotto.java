@@ -31,6 +31,8 @@ public class Lotto {
     }
 
     public Reward matching(Lotto winnerNumber, BonusNumber bonusNumber) {
+        bonusNumber.isDupulicationNumber(winnerNumber);
+
         List<Integer> matchedNumbers = lotto.stream()
                 .filter(number -> winnerNumber.getLotto().contains(number))
                 .collect(Collectors.toList());
@@ -43,9 +45,12 @@ public class Lotto {
         if(matchedNumbers.size() != SCORE_IS_FIVE) {
             return false;
         }
-        int remainNumber = lotto.stream()
-                .peek(number -> matchedNumbers.remove(number))
-                .findFirst().orElse(0);
+        int remainNumber = 0 ;
+        for(Integer num : lotto) {
+            if(!matchedNumbers.contains(num)) {
+                remainNumber = num;
+            }
+        }
 
         return bonusNumber.isMatchingBonus(remainNumber);
     }

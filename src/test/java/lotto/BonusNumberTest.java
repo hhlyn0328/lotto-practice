@@ -3,7 +3,6 @@ package lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -11,19 +10,17 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class BonusNumberTest {
     @Test
     void serviceNumber_음수_test() {
-        BonusNumber bonusNumber = new BonusNumber(-1);
 
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            bonusNumber.isMinusNumber();
+            new BonusNumber(-1);
         });
     }
 
     @Test
     void serviceNumber_1_45_범위가아닌_test() {
-        BonusNumber bonusNumber = new BonusNumber(46);
 
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            bonusNumber.isNotRangeNumber();
+            new BonusNumber(46);
         });
     }
 

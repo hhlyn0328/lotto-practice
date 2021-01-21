@@ -47,8 +47,4 @@ public class LottoNumber {
             throw new IllegalArgumentException();
         }
     }
-
-    protected List<Integer> getLottoNumbers() {
-        return LOTTO_NUMBERS;
-    }
 }
