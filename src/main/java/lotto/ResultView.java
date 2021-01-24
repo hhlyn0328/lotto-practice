@@ -14,10 +14,11 @@ public class ResultView {
     public static void printMatchCount(LottoTotalResult lottoTotalResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(String.format("3개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getThreeMatchCount()));
-        System.out.println(String.format("4개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getFourMatchCount()));
-        System.out.println(String.format("5개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getFiveMatchCount()));
-        System.out.println(String.format("6개 일치 (%d원)- %d개", LottoResult.THREE_MATCH_AMOUNT, lottoTotalResult.getSixMatchCount()));
-        System.out.println("" + String.format("총 수익률은 : %.2f 입니다.",lottoTotalResult.getReturnRate()));
+        System.out.println(String.format("%d개 일치 (%d원) - %d개", LottoRank.FIFTH.getCountOfMatch(), LottoRank.FIFTH.getWinningMoney(), lottoTotalResult.getThreeMatchCount()));
+        System.out.println(String.format("%d개 일치 (%d원) - %d개", LottoRank.FOURTH.getCountOfMatch(), LottoRank.FOURTH.getWinningMoney(), lottoTotalResult.getFourMatchCount()));
+        System.out.println(String.format("%d개 일치 (%d원) - %d개", LottoRank.THIRD.getCountOfMatch(), LottoRank.THIRD.getWinningMoney(), lottoTotalResult.getFiveMatchCount()));
+        System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개", LottoRank.SECOND.getCountOfMatch(), LottoRank.SECOND.getWinningMoney(), lottoTotalResult.getFiveMatchAndBonusMatchCount()));
+        System.out.println(String.format("%d개 일치 (%d원) - %d개", LottoRank.FIRST.getCountOfMatch(), LottoRank.FIRST.getWinningMoney(), lottoTotalResult.getSixMatchCount()));
+        System.out.println("" + String.format("총 수익률은 : %.2f 입니다.", lottoTotalResult.getReturnRate()));
     }
 }

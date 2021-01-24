@@ -16,7 +16,7 @@ class LottoTotalResultTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoWinnerNumber = new LottoWinnerNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        this.lottoWinnerNumber = new LottoWinnerNumber(Arrays.asList(1, 2, 3, 4, 5, 6),7);
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43)));

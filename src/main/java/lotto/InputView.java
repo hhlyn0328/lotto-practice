@@ -24,11 +24,16 @@ public class InputView {
         );
     }
 
+    public static Integer scannerLastWeekBonusLottoNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
     private static LottoWinnerNumber parseInt(List<String> splitLottoNumberStrings) {
         List<Integer> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
-                .map(splitLottoNumberInteger -> Integer.parseInt(splitLottoNumberInteger))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        return new LottoWinnerNumber(splitLottoNumberIntegers);
+        return new LottoWinnerNumber(splitLottoNumberIntegers, scannerLastWeekBonusLottoNumber());
     }
 }

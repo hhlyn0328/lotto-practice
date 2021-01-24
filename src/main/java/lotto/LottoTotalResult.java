@@ -6,6 +6,7 @@ public class LottoTotalResult {
     private int threeMatchCount = 0;
     private int fourMatchCount = 0;
     private int fiveMatchCount = 0;
+    private int fiveMatchAndBonusMatchCount = 0;
     private int sixMatchCount = 0;
     private int totalWinningAmount = 0;
     private float returnRate;
@@ -23,20 +24,29 @@ public class LottoTotalResult {
     }
 
     public void calculateMatchCount(LottoResult lottoResult) {
-        if (lottoResult.matchCountEqual(3)) {
+        if (lottoResult.isMatchCountEqual(3)) {
             this.threeMatchCount++;
+            return;
         }
 
-        if (lottoResult.matchCountEqual(4)) {
+        if (lottoResult.isMatchCountEqual(4)) {
             this.fourMatchCount++;
+            return;
         }
 
-        if (lottoResult.matchCountEqual(5)) {
+        if (lottoResult.isMatchCountEqual(5) && !lottoResult.isMatchBonusNumber()) {
             this.fiveMatchCount++;
+            return;
         }
 
-        if (lottoResult.matchCountEqual(6)) {
+        if (lottoResult.isMatchCountEqual(5) && lottoResult.isMatchBonusNumber()) {
+            this.fiveMatchAndBonusMatchCount++;
+            return;
+        }
+
+        if (lottoResult.isMatchCountEqual(6)) {
             this.sixMatchCount++;
+            return;
         }
     }
 
@@ -44,6 +54,7 @@ public class LottoTotalResult {
         float inputAmount = lottoNumberSize * LOTTO_PRICE;
         this.returnRate = this.totalWinningAmount / inputAmount;
     }
+
 
     public int getThreeMatchCount() {
         return threeMatchCount;
@@ -55,6 +66,10 @@ public class LottoTotalResult {
 
     public int getFiveMatchCount() {
         return fiveMatchCount;
+    }
+
+    public int getFiveMatchAndBonusMatchCount() {
+        return fiveMatchAndBonusMatchCount;
     }
 
     public int getSixMatchCount() {

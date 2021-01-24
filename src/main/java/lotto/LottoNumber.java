@@ -11,7 +11,7 @@ public class LottoNumber {
     private List<Integer> lottoNumber;
 
     protected LottoNumber(List<Integer> lottoNumber) {
-        this.lottoNumber = isValidation(lottoNumber);
+        this.lottoNumber = validations(lottoNumber);
     }
 
     public List<Integer> getLottoNumber() {
@@ -22,19 +22,24 @@ public class LottoNumber {
         return this.lottoNumber.contains(lottoWinnerNumberEach);
     }
 
-    public static List<Integer> isValidation(List<Integer> lottoNumber) {
-        isDuplicationValidation(lottoNumber);
-        isLengthValidation(lottoNumber);
+    public int matchCount(LottoNumber lottoWinnerNumber) {
+        return (int) this.lottoNumber.stream()
+                .filter(lottoWinnerNumber::isContains)
+                .count();
+    }
+
+    public List<Integer> validations(List<Integer> lottoNumber) {
+        duplicationValidation(lottoNumber);
+        lengthValidation(lottoNumber);
 
         for (Integer lottoNumberEach : lottoNumber) {
-            isRangeValidation(lottoNumberEach);
+            rangeValidation(lottoNumberEach);
         }
 
         return lottoNumber;
     }
 
-    public static void isDuplicationValidation(List<Integer> lottoNumber) {
-
+    public void duplicationValidation(List<Integer> lottoNumber) {
         boolean duplicated = lottoNumber.stream()
                 .distinct()
                 .count() < lottoNumber.size();
@@ -44,15 +49,13 @@ public class LottoNumber {
         }
     }
 
-    public static void isRangeValidation(Integer lottoWinnerNumberEach) {
-
+    public void rangeValidation(Integer lottoWinnerNumberEach) {
         if (lottoWinnerNumberEach < LOTTO_START_NUMBER || lottoWinnerNumberEach > LOTTO_LAST_NUMBER) {
             throw new IllegalArgumentException();
         }
     }
 
-    public static void isLengthValidation(List<Integer> lottoNumber) {
-
+    public void lengthValidation(List<Integer> lottoNumber) {
         if (lottoNumber.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
