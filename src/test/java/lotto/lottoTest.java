@@ -24,7 +24,7 @@ public class lottoTest {
         Lotto lotto = new Lotto(ll);
         Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
-        Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(7));
+        Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(lottoWinningNumber,7));
 
         assertThat(Reward.scoreOfReward(reward)).isEqualTo(3);
 
@@ -37,7 +37,7 @@ public class lottoTest {
         Lotto lotto = new Lotto(ll);
         Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,4,5,6,10));
 
-        Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(3));
+        Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(lottoWinningNumber,3));
 
         assertThat(Reward.scoreOfReward(reward)).isEqualTo(5);
         assertThat(Reward.amountOfReward(reward)).isEqualTo(30000000);
@@ -51,7 +51,7 @@ public class lottoTest {
         Lotto lotto = new Lotto(ll);
         Lotto lottoWinningNumber = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
-        Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(10));
+        Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(lottoWinningNumber,10));
 
         assertThat(Reward.scoreOfReward(reward)).isEqualTo(5);
         assertThat(Reward.amountOfReward(reward)).isEqualTo(1500000);

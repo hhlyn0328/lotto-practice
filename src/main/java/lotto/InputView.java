@@ -26,8 +26,8 @@ public class InputView {
         return new Lotto(lottoNumbers);
     }
 
-    protected static BonusNumber inputBonusNumber() {
+    protected static BonusNumber inputBonusNumber(Lotto winnerNumber) {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new BonusNumber(Integer.parseInt(scanner.nextLine()));
+        return new BonusNumber(winnerNumber, Integer.parseInt(scanner.nextLine()));
     }
 }

@@ -26,14 +26,21 @@ public enum Reward {
         return reward.score;
     }
 
-    public static Reward rewardOfScore(long score, boolean isMatchingBonusNumber) {
+    public static Reward rewardOfScore(long score, boolean matchBonus) {
 
         return Arrays.stream(Reward.values())
-                .filter(reward -> (reward.score == score && isMatchingBonusNumber)
-                        || (!reward.equals(SECOND) && reward.score == score))
+                .filter(reward -> isSecond(reward, score, matchBonus)
+                        || isNotSecond(reward, score))
                 .findFirst()
                 .orElse(Reward.MISS);
+    }
 
+    private static boolean isNotSecond(Reward reward, long score) {
+        return !reward.equals(SECOND) && reward.score == score;
+    }
+
+    private static boolean isSecond(Reward reward, long score, boolean matchBonus) {
+        return reward.equals(SECOND) && reward.score == score && matchBonus;
     }
 
 

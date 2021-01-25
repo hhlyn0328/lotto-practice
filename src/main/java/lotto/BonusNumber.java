@@ -5,19 +5,13 @@ public class BonusNumber {
     private static final int LOTTO_MAX_NUMBER = 45;
     private final int bonusNumber;
 
-    public BonusNumber(int bonusNumber) {
+    public BonusNumber(Lotto winnerNumber, int bonusNumber) {
+        isDupulicationNumber(winnerNumber);
+        isNotRangeNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
-        isMinusNumber();
-        isNotRangeNumber();
     }
 
-    protected void isMinusNumber() {
-        if(this.bonusNumber < LOTTO_MIN_NUMBER) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    protected void isNotRangeNumber() {
+    protected void isNotRangeNumber(int bonusNumber) {
         if(bonusNumber < LOTTO_MIN_NUMBER || bonusNumber > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException();
         }
