@@ -15,8 +15,8 @@ class LottoResultTest {
         LottoResult lottoResult = lottoWinnerNumber.matchCount(lottoNumber);
 
 
-        assertThat(lottoResult.getMatchCount()).isEqualTo(5);
-        assertThat(lottoResult.getWinningAmount()).isEqualTo(LottoRank.SECOND.getWinningMoney());
+        assertThat(lottoResult.getLottoRank()).isEqualTo(LottoRank.THIRD);
+        assertThat(lottoResult.getWinningAmount()).isEqualTo(LottoRank.THIRD.getWinningMoney());
     }
 
 }

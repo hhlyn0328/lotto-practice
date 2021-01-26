@@ -33,6 +33,6 @@ class LottoWinnerNumberTest {
         LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(6, 5, 4, 45, 2, 1));
 
-        assertThat(lottoWinnerNumber.matchCount(lottoNumber).getMatchCount()).isEqualTo(5);
+        assertThat(lottoWinnerNumber.matchCount(lottoNumber).getLottoRank().getCountOfMatch()).isEqualTo(5);
     }
 }

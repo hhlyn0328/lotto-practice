@@ -2,34 +2,21 @@ package lotto;
 
 public class LottoResult {
 
-    private int matchCount;
-    private boolean matchBonusNumber;
-
-    private int winningAmount;
+    private LottoRank lottoRank;
 
     public LottoResult(int matchCount, boolean matchBonusNumber) {
-        this.matchCount = matchCount;
-        this.matchBonusNumber = matchBonusNumber;
-        calculateWinningAmount();
+        this.lottoRank = LottoRank.valueOf(matchCount, matchBonusNumber);
     }
 
-    public void calculateWinningAmount() {
-        this.winningAmount = LottoRank.valueOf(this.matchCount, this.matchBonusNumber).getWinningMoney();
-    }
-
-    public int getMatchCount() {
-        return matchCount;
+    protected LottoRank getLottoRank() {
+        return lottoRank;
     }
 
     public int getWinningAmount() {
-        return winningAmount;
+        return this.lottoRank.getWinningMoney();
     }
 
-    public boolean isMatchBonusNumber() {
-        return matchBonusNumber;
-    }
-
-    public boolean isMatchCountEqual(int matchCount) {
-        return this.matchCount == matchCount;
+    public boolean isRankEqual(LottoRank lottoRank) {
+        return this.lottoRank.equals(lottoRank);
     }
 }

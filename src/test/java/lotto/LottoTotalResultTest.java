@@ -50,9 +50,10 @@ class LottoTotalResultTest {
     @Test
     void 일치하는_개수_테스트() {
         LottoTotalResult lottoTotalResult = lottoNumbers.calculateMatchCountAndRate(this.lottoWinnerNumber);
-        assertThat(lottoTotalResult.getThreeMatchCount()).isEqualTo(1);
-        assertThat(lottoTotalResult.getFourMatchCount()).isEqualTo(0);
-        assertThat(lottoTotalResult.getFiveMatchCount()).isEqualTo(0);
-        assertThat(lottoTotalResult.getSixMatchCount()).isEqualTo(0);
+        assertThat(lottoTotalResult.getTotalMatchCountMap().get(LottoRank.FIFTH)).isEqualTo(1);
+        assertThat(lottoTotalResult.getTotalMatchCountMap().get(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(lottoTotalResult.getTotalMatchCountMap().get(LottoRank.THIRD)).isEqualTo(0);
+        assertThat(lottoTotalResult.getTotalMatchCountMap().get(LottoRank.SECOND)).isEqualTo(0);
+        assertThat(lottoTotalResult.getTotalMatchCountMap().get(LottoRank.FIRST)).isEqualTo(0);
     }
 }
