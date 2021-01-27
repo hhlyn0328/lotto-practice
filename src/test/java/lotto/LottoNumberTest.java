@@ -15,6 +15,14 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class LottoNumberTest {
 
     @Test
+    public void NUll로_생성_테스트() {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            new LottoNumber(null);
+        });
+    }
+
+
+    @Test
     public void 랜덤_6자리_생성_테스트() {
         LottoNumber lottoNumber = LottoNumberGenerator.createLottoNumber();
         assertThat(lottoNumber.getLottoNumber().size()).isEqualTo(6);

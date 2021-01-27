@@ -17,13 +17,14 @@ public class LottoTotalResult {
 
     private void calculates(List<LottoResult> lottoResults) {
         putTotalMatchCountMap(lottoResults);
-        calculateTotalWinningAmount(lottoResults);
         calculateReturnRate(lottoResults.size());
     }
 
     private void putTotalMatchCountMap(List<LottoResult> lottoResults) {
         for (LottoRank lottoRank : LottoRank.values()) {
-            totalMatchCountMap.put(lottoRank, matchCount(lottoResults, lottoRank));
+            long rankCount = matchCount(lottoResults, lottoRank);
+            this.totalWinningAmount += lottoRank.getWinningMoney() * rankCount;
+            totalMatchCountMap.put(lottoRank, rankCount);
         }
     }
 
@@ -31,12 +32,6 @@ public class LottoTotalResult {
         return lottoResults.stream()
                 .filter(lottoResult -> lottoResult.isRankEqual(lottoRank))
                 .count();
-    }
-
-    private void calculateTotalWinningAmount(List<LottoResult> lottoResults) {
-        this.totalWinningAmount = lottoResults.stream()
-                .mapToInt(LottoResult::getWinningAmount)
-                .sum();
     }
 
     // 테스트 코드에서 사용하기 위해 작성

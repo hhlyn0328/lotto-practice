@@ -48,9 +48,7 @@ public class LottoNumbers {
                 .map(lottoWinnerNumber::matchCount)
                 .collect(Collectors.toList());
 
-        LottoTotalResult lottoTotalResult = new LottoTotalResult(lottoResults);
-
-        return lottoTotalResult;
+        return new LottoTotalResult(lottoResults);
     }
 
 }

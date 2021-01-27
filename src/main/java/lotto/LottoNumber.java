@@ -4,14 +4,14 @@ import java.util.List;
 
 public class LottoNumber {
 
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_LAST_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    private  int LOTTO_START_NUMBER = 1;
+    private  int LOTTO_LAST_NUMBER = 45;
+    private  int LOTTO_NUMBER_COUNT = 6;
 
     private List<Integer> lottoNumber;
 
     protected LottoNumber(List<Integer> lottoNumber) {
-        this.lottoNumber = validations(lottoNumber);
+        this.lottoNumber = validateLottoNumber(lottoNumber);
     }
 
     public List<Integer> getLottoNumber() {
@@ -28,9 +28,9 @@ public class LottoNumber {
                 .count();
     }
 
-    public List<Integer> validations(List<Integer> lottoNumber) {
-        duplicationValidation(lottoNumber);
-        lengthValidation(lottoNumber);
+    public List<Integer> validateLottoNumber(List<Integer> lottoNumber) {
+        validateLength(lottoNumber);
+        validateDuplication(lottoNumber);
 
         for (Integer lottoNumberEach : lottoNumber) {
             rangeValidation(lottoNumberEach);
@@ -39,7 +39,7 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    public void duplicationValidation(List<Integer> lottoNumber) {
+    public void validateDuplication(List<Integer> lottoNumber) {
         boolean duplicated = lottoNumber.stream()
                 .distinct()
                 .count() < lottoNumber.size();
@@ -55,8 +55,8 @@ public class LottoNumber {
         }
     }
 
-    public void lengthValidation(List<Integer> lottoNumber) {
-        if (lottoNumber.size() != LOTTO_NUMBER_COUNT) {
+    public void validateLength(List<Integer> lottoNumber) {
+        if (lottoNumber == null || lottoNumber.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
     }
