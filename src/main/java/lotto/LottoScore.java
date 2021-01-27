@@ -10,7 +10,7 @@ public class LottoScore {
     }
 
     public boolean isNotZeroReward() {
-        return !Reward.SCORE_0.equals(reward);
+        return !Reward.MISS.equals(reward);
     }
 
     public Reward getReward() {

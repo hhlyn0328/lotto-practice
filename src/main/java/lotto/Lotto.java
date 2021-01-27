@@ -28,12 +28,17 @@ public class Lotto {
         return lotto;
     }
 
-    public Reward matching(Lotto winnerNumber) {
-        long score = lotto.stream()
+    public Reward matching(Lotto winnerNumber, BonusNumber bonusNumber) {
+        long matchedCount = lotto.stream()
                 .filter(number -> winnerNumber.getLotto().contains(number))
-                .mapToInt(Integer::intValue).count();
+                .count();
 
-        return Reward.rewardOfScore(score);
+        return Reward.rewardOfScore(matchedCount, hasBonusNumber(bonusNumber));
+    }
+
+    private boolean hasBonusNumber(BonusNumber bonusNumber) {
+        return lotto.stream()
+                .anyMatch(number -> bonusNumber.isMatchingBonus(number) );
     }
 
     public  void idValidNumberSize() {

@@ -30,7 +30,7 @@ public class ResultView {
 
         results.entrySet()
                 .forEach(result -> {
-                    if(!Reward.SCORE_0.equals(result.getKey())) {
+                    if(!Reward.MISS.equals(result.getKey())) {
                         System.out.printf("%d개 일치 (%d 원) - %d 개", Reward.scoreOfReward(result.getKey())
                                 , Reward.amountOfReward(result.getKey())
                                 , result.getValue());

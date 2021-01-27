@@ -27,11 +27,9 @@ public class LottoGame {
         return this.lottos;
     }
 
-    public LottoResult matching(Lotto winnerNumber) {
-        List<LottoScore> lottoScores = new ArrayList<>();
-
-        lottoScores = lottos.stream()
-                .map(lotto -> new LottoScore(lotto, lotto.matching(winnerNumber)))
+    public LottoResult matching(Lotto winnerNumber, BonusNumber bonusNumber) {
+        List<LottoScore> lottoScores =  lottos.stream()
+                .map(lotto -> new LottoScore(lotto, lotto.matching(winnerNumber, bonusNumber)))
                 .collect(Collectors.toList());
 
         return new LottoResult(lottoScores, price);
