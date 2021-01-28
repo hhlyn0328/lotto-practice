@@ -1,43 +1,42 @@
 package lotto;
 
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+
 public class LottoTotalResult {
     public static final int LOTTO_PRICE = 1000;
 
-    private int threeMatchCount = 0;
-    private int fourMatchCount = 0;
-    private int fiveMatchCount = 0;
-    private int sixMatchCount = 0;
     private int totalWinningAmount = 0;
     private float returnRate;
+    private Map<LottoRank, Long> totalMatchCountMap = new EnumMap<>(LottoRank.class);
 
-    public LottoTotalResult() {
+    public LottoTotalResult(List<LottoResult> lottoResults) {
+        calculates(lottoResults);
     }
 
-    public void add(LottoResult lottoResult) {
-        calculateTotalWinningAmount(lottoResult);
-        calculateMatchCount(lottoResult);
+    private void calculates(List<LottoResult> lottoResults) {
+        putTotalMatchCountMap(lottoResults);
+        calculateReturnRate(lottoResults.size());
     }
 
-    public void calculateTotalWinningAmount(LottoResult lottoResult) {
-        this.totalWinningAmount += lottoResult.getWinningAmount();
+    private void putTotalMatchCountMap(List<LottoResult> lottoResults) {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            long rankCount = matchCount(lottoResults, lottoRank);
+            this.totalWinningAmount += lottoRank.getWinningMoney() * rankCount;
+            totalMatchCountMap.put(lottoRank, rankCount);
+        }
     }
 
-    public void calculateMatchCount(LottoResult lottoResult) {
-        if (lottoResult.matchCountEqual(3)) {
-            this.threeMatchCount++;
-        }
+    private long matchCount(List<LottoResult> lottoResults, LottoRank lottoRank) {
+        return lottoResults.stream()
+                .filter(lottoResult -> lottoResult.isRankEqual(lottoRank))
+                .count();
+    }
 
-        if (lottoResult.matchCountEqual(4)) {
-            this.fourMatchCount++;
-        }
-
-        if (lottoResult.matchCountEqual(5)) {
-            this.fiveMatchCount++;
-        }
-
-        if (lottoResult.matchCountEqual(6)) {
-            this.sixMatchCount++;
-        }
+    // 테스트 코드에서 사용하기 위해 작성
+    protected int getTotalWinningAmount() {
+        return totalWinningAmount;
     }
 
     public void calculateReturnRate(int lottoNumberSize) {
@@ -45,25 +44,8 @@ public class LottoTotalResult {
         this.returnRate = this.totalWinningAmount / inputAmount;
     }
 
-    public int getThreeMatchCount() {
-        return threeMatchCount;
-    }
-
-    public int getFourMatchCount() {
-        return fourMatchCount;
-    }
-
-    public int getFiveMatchCount() {
-        return fiveMatchCount;
-    }
-
-    public int getSixMatchCount() {
-        return sixMatchCount;
-    }
-
-    // 테스트 코드에서 사용하기 위해 작성
-    protected int getTotalWinningAmount() {
-        return totalWinningAmount;
+    public Map<LottoRank, Long> getTotalMatchCountMap() {
+        return totalMatchCountMap;
     }
 
     public float getReturnRate() {

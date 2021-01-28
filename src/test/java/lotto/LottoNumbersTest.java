@@ -14,7 +14,7 @@ public class LottoNumbersTest {
     }
 
     @Test
-    public void 로또_1000원미만_입력시_Exception_테스트() throws Exception {
+    public void 로또_1000원미만_입력시_Exception_테스트() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             new LottoNumbers(999);
         });

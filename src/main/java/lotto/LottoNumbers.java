@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -42,17 +43,12 @@ public class LottoNumbers {
     }
 
     public LottoTotalResult calculateMatchCountAndRate(LottoWinnerNumber lottoWinnerNumber) {
-        LottoTotalResult lottoTotalResult = new LottoTotalResult();
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
 
-            LottoResult lottoResult = lottoWinnerNumber.isMatchCount(lottoNumber);
-            lottoTotalResult.add(lottoResult);
+        List<LottoResult> lottoResults = this.lottoNumbers.stream()
+                .map(lottoWinnerNumber::matchCount)
+                .collect(Collectors.toList());
 
-        }
-
-        lottoTotalResult.calculateReturnRate(this.lottoNumbers.size());
-
-        return lottoTotalResult;
+        return new LottoTotalResult(lottoResults);
     }
 
 }
