@@ -26,7 +26,7 @@ public class lottoTest {
 
         Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(lottoWinningNumber,7));
 
-        assertThat(Reward.scoreOfReward(reward)).isEqualTo(3);
+        assertThat(Reward.valueOfScore(reward)).isEqualTo(3);
 
     }
 
@@ -39,8 +39,8 @@ public class lottoTest {
 
         Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(lottoWinningNumber,3));
 
-        assertThat(Reward.scoreOfReward(reward)).isEqualTo(5);
-        assertThat(Reward.amountOfReward(reward)).isEqualTo(30000000);
+        assertThat(Reward.valueOfScore(reward)).isEqualTo(5);
+        assertThat(Reward.valueOfAmount(reward)).isEqualTo(30000000);
 
     }
 
@@ -53,8 +53,8 @@ public class lottoTest {
 
         Reward reward = lotto.matching(lottoWinningNumber, new BonusNumber(lottoWinningNumber,10));
 
-        assertThat(Reward.scoreOfReward(reward)).isEqualTo(5);
-        assertThat(Reward.amountOfReward(reward)).isEqualTo(1500000);
+        assertThat(Reward.valueOfScore(reward)).isEqualTo(5);
+        assertThat(Reward.valueOfAmount(reward)).isEqualTo(1500000);
 
     }
 

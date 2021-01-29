@@ -18,11 +18,11 @@ public enum Reward {
         this.amount = amount;
     }
 
-    public static long amountOfReward(Reward reward) {
+    public static long valueOfAmount(Reward reward) {
         return reward.amount ;
     }
 
-    public static long scoreOfReward(Reward reward) {
+    public static long valueOfScore(Reward reward) {
         return reward.score;
     }
 

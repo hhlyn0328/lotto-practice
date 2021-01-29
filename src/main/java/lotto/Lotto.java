@@ -30,12 +30,15 @@ public class Lotto {
 
     public Reward matching(Lotto winnerNumber, BonusNumber bonusNumber) {
         long matchedCount = lotto.stream()
-                .filter(number -> winnerNumber.getLotto().contains(number))
+                .filter(number -> winnerNumber.isContains(number))
                 .count();
 
         return Reward.rewardOfScore(matchedCount, hasBonusNumber(bonusNumber));
     }
 
+    public boolean isContains(int number) {
+        return lotto.contains(number);
+    }
     private boolean hasBonusNumber(BonusNumber bonusNumber) {
         return lotto.stream()
                 .anyMatch(number -> bonusNumber.isMatchingBonus(number) );

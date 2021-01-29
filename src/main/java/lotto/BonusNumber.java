@@ -18,10 +18,7 @@ public class BonusNumber {
     }
 
     public void isDupulicationNumber(Lotto lotto) {
-        boolean isDuplication = lotto.getLotto().stream()
-                .anyMatch(number -> number == bonusNumber);
-
-        if(isDuplication) {
+        if(lotto.isContains(bonusNumber)) {
             throw new IllegalArgumentException();
         }
     }
