@@ -15,7 +15,6 @@ public class BonusNumberTest {
         winnerNumber = new Lotto(Arrays.asList(1,2,3,4,5,6));
     }
 
-
     @Test
     void serviceNumber_1_45_범위가아닌_test() {
 
@@ -26,13 +25,10 @@ public class BonusNumberTest {
 
     @Test
     void serviceNumber_로또번호와_중복_test() {
-        BonusNumber bonusNumber = new BonusNumber(winnerNumber,1);
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            bonusNumber.isDupulicationNumber(lotto);
+            new BonusNumber(winnerNumber,2);
         });
-
     }
 
     @Test

@@ -6,9 +6,9 @@ public class BonusNumber {
     private final int bonusNumber;
 
     public BonusNumber(Lotto winnerNumber, int bonusNumber) {
+        this.bonusNumber = bonusNumber;
         isDupulicationNumber(winnerNumber);
         isNotRangeNumber(bonusNumber);
-        this.bonusNumber = bonusNumber;
     }
 
     protected void isNotRangeNumber(int bonusNumber) {
