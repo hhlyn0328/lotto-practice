@@ -4,9 +4,9 @@ import java.util.List;
 
 public class LottoNumber {
 
-    private  int LOTTO_START_NUMBER = 1;
-    private  int LOTTO_LAST_NUMBER = 45;
-    private  int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_LAST_NUMBER = 45;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private List<Integer> lottoNumber;
 

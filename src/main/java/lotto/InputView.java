@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -16,9 +17,27 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine()); // nextInt 로 하면 뒤에 nextLine 이 넘어가서 parseInt로 한번 wrapping
     }
 
+    public static Integer scannerBuyManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static List<LottoNumber> scannerBuyManualLottoNumber(int manualLottoNumberCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoNumberCount; i++) {
+            lottoNumbers.add(parseLottoNumber(Arrays.asList(SCANNER.nextLine().
+                    replaceAll(BLANK, NOT_BLANK).
+                    split(COMMA))));
+        }
+
+        return lottoNumbers;
+    }
+
     public static LottoWinnerNumber scannerLastWeekLottoNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return parseInt(Arrays.asList(SCANNER.nextLine().
+        return parseLottoWinnerNumber(Arrays.asList(SCANNER.nextLine().
                 replaceAll(BLANK, NOT_BLANK).
                 split(COMMA))
         );
@@ -29,7 +48,15 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    private static LottoWinnerNumber parseInt(List<String> splitLottoNumberStrings) {
+    private static LottoNumber parseLottoNumber(List<String> splitLottoNumberStrings) {
+        List<Integer> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        return new LottoNumber(splitLottoNumberIntegers);
+    }
+
+    private static LottoWinnerNumber parseLottoWinnerNumber(List<String> splitLottoNumberStrings) {
         List<Integer> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
