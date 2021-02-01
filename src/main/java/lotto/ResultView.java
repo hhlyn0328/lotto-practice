@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -12,7 +14,11 @@ public class ResultView {
     }
 
     private static void printLotto(Lotto lotto) {
-        System.out.println(lotto.getLotto());
+        List<Integer> lotto1 = lotto.getLotto().stream()
+                .map(lottoNo -> lottoNo.getLottoNo())
+                .collect(Collectors.toList());
+
+        System.out.println(lotto1);
     }
 
     public static void printResult(LottoResult lottoResult) {
@@ -21,7 +27,7 @@ public class ResultView {
 
         printScore(lottoResult);
 
-            System.out.println("총 수익률은 " + lottoResult.winningRate() + "입니다.");
+        System.out.println("총 수익률은 " + lottoResult.winningRate() + "입니다.");
     }
 
     private static void printScore(LottoResult lottoResult) {

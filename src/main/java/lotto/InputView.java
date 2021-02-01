@@ -20,14 +20,18 @@ public class InputView {
     }
 
     protected static Lotto parseLotto(String[] lottoNumber) {
-        List<Integer> lottoNumbers = Arrays.stream(lottoNumber)
-                .map(number -> Integer.parseInt(number))
+//        List<Integer> lottoNumbers = Arrays.stream(lottoNumber)
+//                .map(number -> Integer.parseInt(number))
+//                .collect(Collectors.toList());
+
+        List<LottoNo> lottoNumbers = Arrays.stream(lottoNumber)
+                .map(number -> new LottoNo(Integer.parseInt(number)))
                 .collect(Collectors.toList());
         return new Lotto(lottoNumbers);
     }
 
-    protected static BonusNumber inputBonusNumber(Lotto winnerNumber) {
+    protected static LottoNo inputBonusNumber(Lotto winnerNumber) {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new BonusNumber(winnerNumber, Integer.parseInt(scanner.nextLine()));
+        return new LottoNo(winnerNumber, Integer.parseInt(scanner.nextLine()));
     }
 }

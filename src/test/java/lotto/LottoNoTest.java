@@ -8,36 +8,41 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class BonusNumberTest {
+public class LottoNoTest {
     Lotto winnerNumber;
     @BeforeEach
     void init() {
-        winnerNumber = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        winnerNumber = new Lotto(Arrays.asList(
+                new LottoNo(1),
+                new LottoNo(2),
+                new LottoNo(3),
+                new LottoNo(4),
+                new LottoNo(5),
+                new LottoNo(6)));
     }
 
     @Test
-    void serviceNumber_1_45_범위가아닌_test() {
+    void lottoNo_1_45_범위숫자_아니면_test() {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            new LottoNo(46).isNotRangeNumber();
+        });
+
+    }
+
+    @Test
+    void lottoNo_당첨번호와_보너스번호가_중복이면_test() {
 
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new BonusNumber(winnerNumber,46);
+            new LottoNo(winnerNumber,2);
         });
     }
 
     @Test
-    void serviceNumber_로또번호와_중복_test() {
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new BonusNumber(winnerNumber,2);
-        });
-    }
-
-    @Test
-    void serviceNumber_서비스번호와_일치_test() {
-        BonusNumber bonusNumber = new BonusNumber(winnerNumber,7);
+    void serviceNumber_보너스번호와_일치_test() {
+        LottoNo bonusNumber = new LottoNo(winnerNumber,7);
         boolean isMatchingServiceNumber = bonusNumber.isMatchingBonus(7);
 
         assertThat(isMatchingServiceNumber).isTrue();
 
     }
-
 }
