@@ -10,9 +10,13 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class lottoNumberTest {
     @Test
     void lottoNumber_6개_숫자_test() {
-        List<Integer> ll = Arrays.asList(1,2,3,4,5) ;
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new Lotto(ll).idValidNumberSize();
+            new Lotto(Arrays.asList(
+                    new LottoNo(1),
+                    new LottoNo(2),
+                    new LottoNo(3),
+                    new LottoNo(4),
+                    new LottoNo(5))).idValidNumberSize();
         });
     }
 
@@ -20,17 +24,15 @@ public class lottoNumberTest {
     void lottoNumber_중복숫자_test() {
         List<Integer> ll = Arrays.asList(1,1,2,3,4,5) ;
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new Lotto(ll).isDupulicationNumber();
+            new Lotto(Arrays.asList(
+                    new LottoNo(1),
+                    new LottoNo(1),
+                    new LottoNo(2),
+                    new LottoNo(3),
+                    new LottoNo(4),
+                    new LottoNo(5))).isDupulicationNumber();
         });
     }
 
-    @Test
-    void lottoNumber_바운더리숫자_test() {
-        List<Integer> ll = Arrays.asList(0,0,1,2,3,0) ;
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new Lotto(ll).isValidRangeNumber();
-        });
-
-    }
 
 }

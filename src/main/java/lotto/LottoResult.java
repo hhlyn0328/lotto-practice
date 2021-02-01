@@ -23,7 +23,7 @@ public class LottoResult {
     public long winningRate() {
 
         long winningAmount = countOfScore.entrySet().stream()
-                .mapToLong(lotto -> Reward.amountOfReward(lotto.getKey()) * lotto.getValue() ).sum() ;
+                .mapToLong(lotto -> Reward.valueOfAmount(lotto.getKey()) * lotto.getValue() ).sum() ;
 
         return price.getWinningRate(winningAmount);
     }

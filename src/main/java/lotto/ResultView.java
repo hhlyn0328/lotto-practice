@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -12,7 +14,11 @@ public class ResultView {
     }
 
     private static void printLotto(Lotto lotto) {
-        System.out.println(lotto.getLotto());
+        List<Integer> lotto1 = lotto.getLotto().stream()
+                .map(lottoNo -> lottoNo.getLottoNo())
+                .collect(Collectors.toList());
+
+        System.out.println(lotto1);
     }
 
     public static void printResult(LottoResult lottoResult) {
@@ -21,7 +27,7 @@ public class ResultView {
 
         printScore(lottoResult);
 
-            System.out.println("총 수익률은 " + lottoResult.winningRate() + "입니다.");
+        System.out.println("총 수익률은 " + lottoResult.winningRate() + "입니다.");
     }
 
     private static void printScore(LottoResult lottoResult) {
@@ -31,8 +37,8 @@ public class ResultView {
         results.entrySet()
                 .forEach(result -> {
                     if(!Reward.MISS.equals(result.getKey())) {
-                        System.out.printf("%d개 일치 (%d 원) - %d 개", Reward.scoreOfReward(result.getKey())
-                                , Reward.amountOfReward(result.getKey())
+                        System.out.printf("%d개 일치 (%d 원) - %d 개", Reward.valueOfScore(result.getKey())
+                                , Reward.valueOfAmount(result.getKey())
                                 , result.getValue());
                         System.out.println();
                     }
