@@ -20,18 +20,9 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumbers(int inputAmount, int manualLottoNumberCount, List<LottoNumber> manualLottoNumbers) {
+    public LottoNumbers(int inputAmount, List<LottoNumber> manualLottoNumbers) {
         validateInputAmount(inputAmount);
-        validateManualLottoNumber(manualLottoNumberCount, manualLottoNumbers);
-        createLottoNumbers(inputAmount, manualLottoNumberCount, manualLottoNumbers);
-    }
-
-    private void validateManualLottoNumber(int manualLottoNumberCount, List<LottoNumber> manualLottoNumbers) {
-        List<LottoNumber> nullableManualLottoNumbers = Optional.ofNullable(manualLottoNumbers).orElseThrow(IllegalArgumentException::new);
-
-        if (manualLottoNumberCount != nullableManualLottoNumbers.size()) {
-            throw new IllegalArgumentException();
-        }
+        createLottoNumbers(inputAmount, manualLottoNumbers);
     }
 
     private void validateInputAmount(int inputAmount) {
@@ -40,16 +31,10 @@ public class LottoNumbers {
         }
     }
 
-    public void createLottoNumbers(int inputCash, int manualLottoNumberCount, List<LottoNumber> manualLottoNumbers) {
-        int autoLottoCount = inputCash / LOTTO_PRICE - manualLottoNumberCount;
+    public void createLottoNumbers(int inputCash, List<LottoNumber> manualLottoNumbers) {
+        int autoLottoCount = inputCash / LOTTO_PRICE - manualLottoNumbers.size();
         addAutoLottoNumber(autoLottoCount);
-        addManualLottoNumber(manualLottoNumberCount, manualLottoNumbers);
-    }
-
-    private void addManualLottoNumber(int manualLottoNumberCount, List<LottoNumber> manualLottoNumbers) {
-        for (int j = 0; j < manualLottoNumberCount; j++) {
-            this.lottoNumbers.add(manualLottoNumbers.get(j));
-        }
+        this.lottoNumbers.addAll(manualLottoNumbers);
     }
 
     private void addAutoLottoNumber(int autoLottoCount) {

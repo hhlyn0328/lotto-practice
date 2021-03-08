@@ -18,21 +18,14 @@ public class LottoNumbersTest {
                 new LottoNumber(Arrays.asList(13, 14, 15, 16, 17, 18))
         );
 
-        LottoNumbers lottoNumbers = new LottoNumbers(14000, 3, manualLottoNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(14000, manualLottoNumbers);
         assertThat(lottoNumbers.getLottoNumbers().size()).isEqualTo(14);
-    }
-
-    @Test
-    public void 수동번호_입력안했을시_로또번호_생성_테스() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumbers(14000, 3, null);
-        });
     }
 
     @Test
     public void 로또_1000원미만_입력시_Exception_테스트() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumbers(999, 0, null);
+            new LottoNumbers(999, null);
         });
     }
 

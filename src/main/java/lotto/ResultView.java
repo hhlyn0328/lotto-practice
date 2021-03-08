@@ -5,8 +5,7 @@ import java.util.Map;
 public class ResultView {
 
     public static void printLottoNumber(LottoNumbers lottoNumbers, int manualLottoNumberCount) {
-        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", manualLottoNumberCount, lottoNumbers.getLottoNumbers().size()));
-
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", manualLottoNumberCount, lottoNumbers.getLottoNumbers().size() - manualLottoNumberCount));
         for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
             System.out.println(lottoNumber.toString());
         }

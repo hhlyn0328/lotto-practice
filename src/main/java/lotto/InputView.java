@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -11,6 +8,7 @@ public class InputView {
     private static final String BLANK = " ";
     private static final String NOT_BLANK = "";
     private static final String COMMA = ",";
+    public static final int LOTTO_NUMBER_SIZE = 6;
 
     public static int scannerBuyAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -49,6 +47,8 @@ public class InputView {
     }
 
     private static LottoNumber parseLottoNumber(List<String> splitLottoNumberStrings) {
+        validateManualLottoNumber(splitLottoNumberStrings);
+
         List<Integer> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -62,5 +62,12 @@ public class InputView {
                 .collect(Collectors.toList());
 
         return new LottoWinnerNumber(splitLottoNumberIntegers, scannerLastWeekBonusLottoNumber());
+    }
+
+    private static void validateManualLottoNumber(List<String> manualLottoNumbers) {
+
+        if (manualLottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException();
+        }
     }
 }
