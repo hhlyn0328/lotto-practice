@@ -16,23 +16,23 @@ class LottoTotalResultTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoWinnerNumber = new LottoWinnerNumber(Arrays.asList(1, 2, 3, 4, 5, 6),7);
+        this.lottoWinnerNumber = new LottoWinnerNumber(Arrays.asList(new LottoNo(1),new LottoNo(2),new LottoNo(3),new LottoNo(4),new LottoNo(5),new LottoNo(6)),new LottoNo(7));
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(3, 5, 11, 16, 32, 38)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(7, 11, 16, 35, 36, 44)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(1, 8, 11, 31, 41, 42)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(13, 14, 16, 38, 42, 45)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(7, 11, 30, 40, 42, 43)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(2, 13, 22, 32, 38, 45)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(23, 25, 33, 36, 39, 41)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(1, 3, 5, 14, 22, 45)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(5, 9, 38, 41, 43, 44)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(2, 8, 9, 18, 19, 21)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(13, 14, 18, 21, 23, 35)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(17, 21, 29, 37, 42, 45)));
-        lottoNumbers.add(new LottoNumber(Arrays.asList(3, 8, 27, 30, 35, 44)));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(8), new LottoNo(21), new LottoNo(23), new LottoNo(41), new LottoNo(42), new LottoNo(43))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(3), new LottoNo(5), new LottoNo(11), new LottoNo(16), new LottoNo(32), new LottoNo(38))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(7), new LottoNo(11), new LottoNo(16), new LottoNo(35), new LottoNo(36), new LottoNo(44))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(1), new LottoNo(8), new LottoNo(11), new LottoNo(31), new LottoNo(41), new LottoNo(42))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(13), new LottoNo(14), new LottoNo(16), new LottoNo(38), new LottoNo(42), new LottoNo(45))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(7), new LottoNo(11), new LottoNo(30), new LottoNo(40), new LottoNo(42), new LottoNo(43))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(2), new LottoNo(13), new LottoNo(22), new LottoNo(32), new LottoNo(38), new LottoNo(45))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(23), new LottoNo(25), new LottoNo(33), new LottoNo(36), new LottoNo(39), new LottoNo(41))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(1), new LottoNo(3), new LottoNo(5), new LottoNo(14), new LottoNo(22), new LottoNo(45))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(5), new LottoNo(9), new LottoNo(38), new LottoNo(41), new LottoNo(43), new LottoNo(44))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(2), new LottoNo(8), new LottoNo(9), new LottoNo(18), new LottoNo(19), new LottoNo(21))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(13), new LottoNo(14), new LottoNo(18), new LottoNo(21), new LottoNo(23), new LottoNo(35))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(17), new LottoNo(21), new LottoNo(29), new LottoNo(37), new LottoNo(42), new LottoNo(45))));
+        lottoNumbers.add(new LottoNumber(Arrays.asList(new LottoNo(3), new LottoNo(8), new LottoNo(27), new LottoNo(30), new LottoNo(35), new LottoNo(44))));
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 

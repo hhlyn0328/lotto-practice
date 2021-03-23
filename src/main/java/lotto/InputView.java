@@ -41,24 +41,24 @@ public class InputView {
         );
     }
 
-    public static Integer scannerLastWeekBonusLottoNumber() {
+    public static LottoNo scannerLastWeekBonusLottoNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return Integer.parseInt(SCANNER.nextLine());
+        return new LottoNo(Integer.parseInt(SCANNER.nextLine()));
     }
 
     private static LottoNumber parseLottoNumber(List<String> splitLottoNumberStrings) {
         validateManualLottoNumber(splitLottoNumberStrings);
 
-        List<Integer> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
-                .map(Integer::parseInt)
+        List<LottoNo> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
+                .map(i -> new LottoNo(Integer.parseInt(i)))
                 .collect(Collectors.toList());
 
         return new LottoNumber(splitLottoNumberIntegers);
     }
 
     private static LottoWinnerNumber parseLottoWinnerNumber(List<String> splitLottoNumberStrings) {
-        List<Integer> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
-                .map(Integer::parseInt)
+        List<LottoNo> splitLottoNumberIntegers = splitLottoNumberStrings.stream()
+                .map(i -> new LottoNo(Integer.parseInt(i)))
                 .collect(Collectors.toList());
 
         return new LottoWinnerNumber(splitLottoNumberIntegers, scannerLastWeekBonusLottoNumber());

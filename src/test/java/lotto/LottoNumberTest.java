@@ -28,31 +28,9 @@ public class LottoNumberTest {
         assertThat(lottoNumber.getLottoNumber().size()).isEqualTo(6);
     }
 
-
-    @Test
-    void 로또가능값_0부터45가_아닌경우_Exception테스트() {
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(0, 2, 3, 4, 5, 6));
-        });
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 46));
-        });
-    }
-
-    @Test
-    void 번호가_중복인경우_Exception테스트() {
-
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoNumber(Arrays.asList(1, 1, 3, 4, 5, 6));
-        });
-
-    }
-
     @ParameterizedTest
     @MethodSource("generateData")
-    void 번호가_6자리_Exception테스트(List<Integer> numbers) {
+    void 번호가_6자리_Exception테스트(List<LottoNo> numbers) {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             new LottoNumber(numbers);
         });
@@ -71,8 +49,8 @@ public class LottoNumberTest {
 
     @Test
     void 당첨번호랑_로또번호랑_몇개_일치하는지_체크() {
-        LottoNumber lottoWinnerNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(6, 5, 4, 45, 2, 1));
+        LottoNumber lottoWinnerNumber = new LottoNumber(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(6)));
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(new LottoNo(6), new LottoNo(5), new LottoNo(4), new LottoNo(45), new LottoNo(2), new LottoNo(1)));
 
         assertThat(lottoNumber.matchCount(lottoWinnerNumber)).isEqualTo(5);
     }
