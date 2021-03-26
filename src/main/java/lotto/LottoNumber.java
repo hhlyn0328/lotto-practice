@@ -4,43 +4,40 @@ import java.util.List;
 
 public class LottoNumber {
 
-    private  int LOTTO_START_NUMBER = 1;
-    private  int LOTTO_LAST_NUMBER = 45;
-    private  int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private List<Integer> lottoNumber;
+    private List<LottoNo> lottoNumber;
 
-    protected LottoNumber(List<Integer> lottoNumber) {
+    protected LottoNumber(List<LottoNo> lottoNumber) {
         this.lottoNumber = validateLottoNumber(lottoNumber);
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNo> getLottoNumber() {
         return lottoNumber;
     }
 
-    public boolean isContains(Integer lottoWinnerNumberEach) {
-        return this.lottoNumber.contains(lottoWinnerNumberEach);
+    public boolean isContains(LottoNo lottoWinnerNumberEach) {
+
+        return this.lottoNumber.stream()
+                .anyMatch(lottoNo -> lottoNo.getLottoNo().equals(lottoWinnerNumberEach.getLottoNo()));
     }
 
     public int matchCount(LottoNumber lottoWinnerNumber) {
-        return (int) this.lottoNumber.stream()
+         return (int) this.lottoNumber.stream()
                 .filter(lottoWinnerNumber::isContains)
                 .count();
     }
 
-    public List<Integer> validateLottoNumber(List<Integer> lottoNumber) {
+    public List<LottoNo> validateLottoNumber(List<LottoNo> lottoNumber) {
         validateLength(lottoNumber);
         validateDuplication(lottoNumber);
-
-        for (Integer lottoNumberEach : lottoNumber) {
-            rangeValidation(lottoNumberEach);
-        }
 
         return lottoNumber;
     }
 
-    public void validateDuplication(List<Integer> lottoNumber) {
+    public void validateDuplication(List<LottoNo> lottoNumber) {
         boolean duplicated = lottoNumber.stream()
+                .map(LottoNo::getLottoNo)
                 .distinct()
                 .count() < lottoNumber.size();
 
@@ -49,20 +46,9 @@ public class LottoNumber {
         }
     }
 
-    public void rangeValidation(Integer lottoWinnerNumberEach) {
-        if (lottoWinnerNumberEach < LOTTO_START_NUMBER || lottoWinnerNumberEach > LOTTO_LAST_NUMBER) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public void validateLength(List<Integer> lottoNumber) {
+    public void validateLength(List<LottoNo> lottoNumber) {
         if (lottoNumber == null || lottoNumber.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(this.lottoNumber);
     }
 }

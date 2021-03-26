@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -19,25 +20,25 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumbers(int inputAmount) {
-        validationInputAmount(inputAmount);
-        createLottoNumbers(inputAmount);
+    public LottoNumbers(int inputAmount, List<LottoNumber> manualLottoNumbers) {
+        validateInputAmount(inputAmount);
+        createLottoNumbers(inputAmount, manualLottoNumbers);
     }
 
-    private void validationInputAmount(int inputAmount) {
+    private void validateInputAmount(int inputAmount) {
         if (inputAmount < LOTTO_PRICE) {
             throw new IllegalArgumentException();
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+    public void createLottoNumbers(int inputCash, List<LottoNumber> manualLottoNumbers) {
+        int autoLottoCount = inputCash / LOTTO_PRICE - manualLottoNumbers.size();
+        addAutoLottoNumber(autoLottoCount);
+        this.lottoNumbers.addAll(manualLottoNumbers);
     }
 
-    public void createLottoNumbers(int inputCash) {
-        int lottoCount = inputCash / LOTTO_PRICE;
-
-        for (int i = 0; i < lottoCount; i++) {
+    private void addAutoLottoNumber(int autoLottoCount) {
+        for (int i = 0; i < autoLottoCount; i++) {
             this.lottoNumbers.add(LottoNumberGenerator.createLottoNumber());
         }
     }
@@ -49,6 +50,10 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
 
         return new LottoTotalResult(lottoResults);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
 }
